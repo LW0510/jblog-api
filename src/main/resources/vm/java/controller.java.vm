@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.weiframework.framework.aspectj.lang.annotation.Log;
-import com.weiframework.framework.aspectj.lang.enums.BusinessType;
+import com.ghc.framework.aspectj.lang.annotation.Log;
+import com.ghc.framework.aspectj.lang.enums.BusinessType;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
-import com.weiframework.framework.web.controller.BaseController;
-import com.weiframework.framework.web.domain.AjaxResult;
-import com.weiframework.common.utils.poi.ExcelUtil;
-import com.weiframework.framework.web.page.TableDataInfo;
+import com.ghc.framework.web.controller.BaseController;
+import com.ghc.framework.web.domain.AjaxResult;
+import com.ghc.common.utils.poi.ExcelUtil;
+#if($table.crud)
+import com.ghc.framework.web.page.TableDataInfo;
+#elseif($table.tree)
+#end
 
 /**
  * ${functionName}Controller
@@ -38,12 +41,20 @@ public class ${ClassName}Controller extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:list')")
     @GetMapping("/list")
+#if($table.crud)
     public TableDataInfo list(${ClassName} ${className})
     {
         startPage();
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         return getDataTable(list);
     }
+#elseif($table.tree)
+    public AjaxResult list(${ClassName} ${className})
+    {
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return AjaxResult.success(list);
+    }
+#end
 
     /**
      * 导出${functionName}列表

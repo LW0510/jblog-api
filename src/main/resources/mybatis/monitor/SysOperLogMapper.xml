@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weiframework.project.monitor.mapper.SysOperLogMapper">
+<mapper namespace="com.ghc.project.monitor.mapper.SysOperLogMapper">
 
 	<resultMap type="SysOperLog" id="SysOperLogResult">
 		<id     property="operId"         column="oper_id"        />
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="title != null and title != ''">
 				AND title like concat('%', #{title}, '%')
 			</if>
-			<if test="businessType != null">
+			<if test="businessType != null and businessType != ''">
 				AND business_type = #{businessType}
 			</if>
 			<if test="businessTypes != null and businessTypes.length > 0">
@@ -61,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and date_format(oper_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
 			</if>
 		</where>
+		order by oper_id desc
 	</select>
 	
 	<delete id="deleteOperLogByIds" parameterType="Long">

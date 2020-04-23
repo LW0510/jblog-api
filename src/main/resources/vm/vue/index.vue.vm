@@ -22,7 +22,7 @@
         />
       </el-form-item>
 #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
-        <el-form-item label="${comment}" prop="${column.javaField}">
+      <el-form-item label="${comment}" prop="${column.javaField}">
         <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
           <el-option
             v-for="dict in ${column.javaField}Options"
@@ -33,7 +33,7 @@
         </el-select>
       </el-form-item>
 #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && $dictType)
-        <el-form-item label="${comment}" prop="${column.javaField}">
+      <el-form-item label="${comment}" prop="${column.javaField}">
         <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
           <el-option label="请选择字典生成" value="" />
         </el-select>
@@ -112,7 +112,7 @@
 #elseif($column.list && $column.htmlType == "datetime")
       <el-table-column label="${comment}" align="center" prop="${javaField}" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.${javaField}) }}</span>
+          <span>{{ parseTime(scope.row.${javaField}, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
 #elseif($column.list && "" != $column.dictType)
@@ -150,7 +150,7 @@
     />
 
     <!-- 添加或修改${functionName}对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px">
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
 #foreach($column in $columns)
 #set($field=$column.javaField)
@@ -230,6 +230,7 @@
 import { list${BusinessName}, get${BusinessName}, del${BusinessName}, add${BusinessName}, update${BusinessName}, export${BusinessName} } from "@/api/${moduleName}/${businessName}";
 
 export default {
+  name: "${BusinessName}",
   data() {
     return {
       // 遮罩层
@@ -257,8 +258,7 @@ export default {
 #end
 #if(${column.dictType} != '')
       // $comment字典
-      ${column.javaField}Options: []#if($velocityCount != $columns.size()),#end
-
+      ${column.javaField}Options: [],
 #end
 #end
       // 查询参数
@@ -288,6 +288,7 @@ export default {
         $column.javaField: [
           { required: true, message: "$comment不能为空", trigger: "blur" }
         ]#if($velocityCount != $columns.size()),#end
+
 #end
 #end
       }
