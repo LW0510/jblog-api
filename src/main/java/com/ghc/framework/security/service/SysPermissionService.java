@@ -11,7 +11,7 @@ import com.ghc.project.system.service.ISysRoleService;
 /**
  * 用户权限处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Component
 public class SysPermissionService

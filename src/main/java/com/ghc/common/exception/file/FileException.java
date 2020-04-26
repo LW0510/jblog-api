@@ -5,7 +5,7 @@ import com.ghc.common.exception.BaseException;
 /**
  * 文件信息异常类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class FileException extends BaseException
 {

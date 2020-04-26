@@ -11,7 +11,7 @@ import com.ghc.common.utils.StringUtils;
 /**
  * 类型转换器
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class Convert
 {

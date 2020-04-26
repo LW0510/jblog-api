@@ -7,7 +7,7 @@ import com.ghc.common.constant.Constants;
 /**
  * VelocityEngine工厂
  * 
- * @author RuoYi
+ * @author ghc
  */
 public class VelocityInitializer
 {

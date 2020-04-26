@@ -6,7 +6,7 @@ import com.ghc.project.system.domain.SysDictType;
 /**
  * 字典 业务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface ISysDictTypeService
 {

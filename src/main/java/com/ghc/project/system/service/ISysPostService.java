@@ -6,7 +6,7 @@ import com.ghc.project.system.domain.SysPost;
 /**
  * 岗位信息 服务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface ISysPostService
 {

@@ -3,7 +3,7 @@ package com.ghc.project.system.domain.vo;
 /**
  * 路由显示信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class MetaVo
 {

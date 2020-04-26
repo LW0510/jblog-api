@@ -7,7 +7,7 @@ import com.ghc.common.utils.DateUtils;
 /**
  * JVM相关信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class Jvm
 {

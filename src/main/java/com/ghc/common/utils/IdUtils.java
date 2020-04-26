@@ -5,7 +5,7 @@ import com.ghc.common.core.lang.UUID;
 /**
  * ID生成器工具类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class IdUtils
 {

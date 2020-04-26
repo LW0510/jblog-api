@@ -11,7 +11,7 @@ import com.ghc.framework.web.domain.Server;
 /**
  * 服务器监控
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/monitor/server")

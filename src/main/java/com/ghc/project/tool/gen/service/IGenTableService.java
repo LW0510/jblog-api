@@ -7,7 +7,7 @@ import com.ghc.project.tool.gen.domain.GenTable;
 /**
  * 业务 服务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface IGenTableService
 {

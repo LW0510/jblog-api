@@ -6,7 +6,7 @@ import com.ghc.project.monitor.domain.SysJob;
 /**
  * 调度任务信息 数据层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface SysJobMapper
 {

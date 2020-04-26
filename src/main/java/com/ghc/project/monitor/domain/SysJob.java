@@ -16,7 +16,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 定时任务调度表 sys_job
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysJob extends BaseEntity implements Serializable
 {

@@ -5,7 +5,7 @@ import com.ghc.common.exception.BaseException;
 /**
  * 用户信息异常类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class UserException extends BaseException
 {

@@ -24,7 +24,7 @@ import com.ghc.project.system.service.ISysNoticeService;
 /**
  * 公告 信息操作处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/notice")

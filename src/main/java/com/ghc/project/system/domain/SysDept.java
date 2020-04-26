@@ -12,7 +12,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 部门表 sys_dept
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysDept extends BaseEntity
 {

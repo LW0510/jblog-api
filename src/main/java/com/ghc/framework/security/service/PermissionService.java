@@ -10,9 +10,9 @@ import com.ghc.framework.security.LoginUser;
 import com.ghc.project.system.domain.SysRole;
 
 /**
- * RuoYi首创 自定义权限实现，ss取自SpringSecurity首字母
+ * ghc首创 自定义权限实现，ss取自SpringSecurity首字母
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Service("ss")
 public class PermissionService

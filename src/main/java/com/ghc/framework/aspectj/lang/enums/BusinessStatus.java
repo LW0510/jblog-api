@@ -3,7 +3,7 @@ package com.ghc.framework.aspectj.lang.enums;
 /**
  * 操作状态
  * 
- * @author ruoyi
+ * @author ghc
  *
  */
 public enum BusinessStatus

@@ -7,7 +7,7 @@ import com.ghc.project.system.domain.SysMenu;
 /**
  * 菜单表 数据层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface SysMenuMapper
 {

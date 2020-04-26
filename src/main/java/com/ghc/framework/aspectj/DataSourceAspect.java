@@ -17,7 +17,7 @@ import com.ghc.framework.datasource.DynamicDataSourceContextHolder;
 /**
  * 多数据源处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Aspect
 @Order(1)

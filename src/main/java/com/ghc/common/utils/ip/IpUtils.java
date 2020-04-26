@@ -8,7 +8,7 @@ import com.ghc.common.utils.StringUtils;
 /**
  * 获取IP方法
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class IpUtils
 {

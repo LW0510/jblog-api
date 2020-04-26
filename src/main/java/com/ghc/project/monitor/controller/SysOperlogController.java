@@ -20,7 +20,7 @@ import com.ghc.project.monitor.service.ISysOperLogService;
 /**
  * 操作日志记录
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/monitor/operlog")

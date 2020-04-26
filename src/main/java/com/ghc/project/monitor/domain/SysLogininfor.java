@@ -9,7 +9,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 系统访问记录表 sys_logininfor
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysLogininfor extends BaseEntity
 {

@@ -20,7 +20,7 @@ import com.ghc.framework.web.page.TableDataInfo;
 /**
  * 调度日志操作处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/monitor/jobLog")

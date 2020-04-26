@@ -11,7 +11,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 参数配置表 sys_config
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysConfig extends BaseEntity
 {

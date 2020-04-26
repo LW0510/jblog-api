@@ -3,7 +3,7 @@ package com.ghc.common.constant;
 /**
  * 返回状态码
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface HttpStatus
 {

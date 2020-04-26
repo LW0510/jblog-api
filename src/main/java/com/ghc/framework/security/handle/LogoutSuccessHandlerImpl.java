@@ -22,7 +22,7 @@ import com.ghc.framework.web.domain.AjaxResult;
 /**
  * 自定义退出处理类 返回成功
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Configuration
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler

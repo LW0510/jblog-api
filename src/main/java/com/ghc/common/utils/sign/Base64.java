@@ -3,7 +3,7 @@ package com.ghc.common.utils.sign;
 /**
  * Base64工具类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public final class Base64
 {

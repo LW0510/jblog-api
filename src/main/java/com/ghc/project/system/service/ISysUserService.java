@@ -6,7 +6,7 @@ import com.ghc.project.system.domain.SysUser;
 /**
  * 用户 业务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface ISysUserService
 {

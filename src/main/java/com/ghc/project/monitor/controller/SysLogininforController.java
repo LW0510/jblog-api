@@ -20,7 +20,7 @@ import com.ghc.project.monitor.service.ISysLogininforService;
 /**
  * 系统访问记录
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/monitor/logininfor")

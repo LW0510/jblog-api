@@ -14,7 +14,7 @@ import com.ghc.framework.web.domain.AjaxResult;
 /**
  * 防止重复提交拦截器
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Component
 public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter

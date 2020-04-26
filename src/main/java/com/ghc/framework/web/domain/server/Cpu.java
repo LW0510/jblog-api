@@ -5,7 +5,7 @@ import com.ghc.common.utils.Arith;
 /**
  * CPU相关信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class Cpu
 {

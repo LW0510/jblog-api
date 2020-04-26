@@ -21,7 +21,7 @@ import com.ghc.project.system.domain.SysUser;
 /**
  * 数据过滤处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Aspect
 @Component

@@ -7,7 +7,7 @@ import com.ghc.project.system.domain.SysDept;
 /**
  * 部门管理 数据层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface SysDeptMapper
 {

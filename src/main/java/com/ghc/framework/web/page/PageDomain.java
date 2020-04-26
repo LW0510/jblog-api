@@ -5,7 +5,7 @@ import com.ghc.common.utils.StringUtils;
 /**
  * 分页数据
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class PageDomain
 {

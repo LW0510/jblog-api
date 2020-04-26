@@ -11,7 +11,7 @@ import com.ghc.common.core.text.StrFormatter;
 /**
  * 字符串工具类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {

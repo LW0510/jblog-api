@@ -11,7 +11,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 业务表 gen_table
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class GenTable extends BaseEntity
 {

@@ -6,7 +6,7 @@ import com.ghc.project.system.domain.SysNotice;
 /**
  * 公告 服务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface ISysNoticeService
 {

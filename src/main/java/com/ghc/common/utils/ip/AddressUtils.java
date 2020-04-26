@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.ghc.common.utils.StringUtils;
 import com.ghc.common.utils.http.HttpUtils;
-import com.ghc.framework.config.RuoYiConfig;
+import com.ghc.framework.config.GhcConfig;
 
 /**
  * 获取地址类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class AddressUtils
 {
@@ -26,7 +26,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (RuoYiConfig.isAddressEnabled())
+        if (GhcConfig.isAddressEnabled())
         {
             String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
             if (StringUtils.isEmpty(rspStr))

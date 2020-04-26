@@ -24,7 +24,7 @@ import com.ghc.project.system.service.ISysDeptService;
 /**
  * 部门信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/dept")
