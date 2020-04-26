@@ -11,7 +11,7 @@ import com.ghc.framework.aspectj.lang.enums.DataSourceType;
 /**
  * 自定义多数据源切换注解
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

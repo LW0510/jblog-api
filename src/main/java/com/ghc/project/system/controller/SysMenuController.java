@@ -27,7 +27,7 @@ import com.ghc.project.system.service.ISysMenuService;
 /**
  * 菜单信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/menu")

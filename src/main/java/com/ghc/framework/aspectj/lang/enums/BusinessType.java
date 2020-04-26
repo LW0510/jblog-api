@@ -3,7 +3,7 @@ package com.ghc.framework.aspectj.lang.enums;
 /**
  * 业务操作类型
  * 
- * @author ruoyi
+ * @author ghc
  */
 public enum BusinessType
 {

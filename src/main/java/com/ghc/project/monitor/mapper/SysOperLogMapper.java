@@ -6,7 +6,7 @@ import com.ghc.project.monitor.domain.SysOperLog;
 /**
  * 操作日志 数据层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface SysOperLogMapper
 {

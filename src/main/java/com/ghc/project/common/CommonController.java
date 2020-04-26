@@ -13,14 +13,14 @@ import com.ghc.common.constant.Constants;
 import com.ghc.common.utils.StringUtils;
 import com.ghc.common.utils.file.FileUploadUtils;
 import com.ghc.common.utils.file.FileUtils;
-import com.ghc.framework.config.RuoYiConfig;
+import com.ghc.framework.config.GhcConfig;
 import com.ghc.framework.config.ServerConfig;
 import com.ghc.framework.web.domain.AjaxResult;
 
 /**
  * 通用请求处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 public class CommonController
@@ -46,7 +46,7 @@ public class CommonController
                 throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-            String filePath = RuoYiConfig.getDownloadPath() + fileName;
+            String filePath = GhcConfig.getDownloadPath() + fileName;
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
@@ -73,7 +73,7 @@ public class CommonController
         try
         {
             // 上传文件路径
-            String filePath = RuoYiConfig.getUploadPath();
+            String filePath = GhcConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + fileName;
@@ -95,7 +95,7 @@ public class CommonController
     public void resourceDownload(String name, HttpServletRequest request, HttpServletResponse response) throws Exception
     {
         // 本地资源路径
-        String localPath = RuoYiConfig.getProfile();
+        String localPath = GhcConfig.getProfile();
         // 数据库资源地址
         String downloadPath = localPath + StringUtils.substringAfter(name, Constants.RESOURCE_PREFIX);
         // 下载名称

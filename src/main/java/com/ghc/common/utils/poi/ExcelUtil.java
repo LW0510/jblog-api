@@ -43,7 +43,7 @@ import com.ghc.framework.aspectj.lang.annotation.Excel;
 import com.ghc.framework.aspectj.lang.annotation.Excel.ColumnType;
 import com.ghc.framework.aspectj.lang.annotation.Excel.Type;
 import com.ghc.framework.aspectj.lang.annotation.Excels;
-import com.ghc.framework.config.RuoYiConfig;
+import com.ghc.framework.config.GhcConfig;
 import com.ghc.framework.web.domain.AjaxResult;
 import com.ghc.common.core.text.Convert;
 import com.ghc.common.exception.CustomException;
@@ -54,7 +54,7 @@ import com.ghc.common.utils.reflect.ReflectUtils;
 /**
  * Excel相关处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class ExcelUtil<T>
 {
@@ -680,7 +680,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = GhcConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {

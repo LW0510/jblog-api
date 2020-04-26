@@ -11,7 +11,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 角色表 sys_role
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysRole extends BaseEntity
 {

@@ -9,7 +9,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 操作日志记录表 oper_log
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysOperLog extends BaseEntity
 {

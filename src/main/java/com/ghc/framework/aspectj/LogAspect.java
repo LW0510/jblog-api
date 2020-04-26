@@ -33,7 +33,7 @@ import com.ghc.project.monitor.domain.SysOperLog;
 /**
  * 操作日志记录处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Aspect
 @Component

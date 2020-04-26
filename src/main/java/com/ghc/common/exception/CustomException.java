@@ -3,7 +3,7 @@ package com.ghc.common.exception;
 /**
  * 自定义异常
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class CustomException extends RuntimeException
 {

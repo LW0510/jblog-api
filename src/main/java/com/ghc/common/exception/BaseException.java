@@ -6,7 +6,7 @@ import com.ghc.common.utils.StringUtils;
 /**
  * 基础异常
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class BaseException extends RuntimeException
 {

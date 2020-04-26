@@ -3,7 +3,7 @@ package com.ghc.common.constant;
 /**
  * 任务调度通用常量
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface ScheduleConstants
 {

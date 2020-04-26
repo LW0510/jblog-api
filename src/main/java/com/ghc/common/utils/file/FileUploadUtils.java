@@ -11,12 +11,12 @@ import com.ghc.common.exception.file.InvalidExtensionException;
 import com.ghc.common.utils.DateUtils;
 import com.ghc.common.utils.StringUtils;
 import com.ghc.common.utils.security.Md5Utils;
-import com.ghc.framework.config.RuoYiConfig;
+import com.ghc.framework.config.GhcConfig;
 
 /**
  * 文件上传工具类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class FileUploadUtils
 {
@@ -33,7 +33,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = GhcConfig.getProfile();
 
     private static int counter = 0;
 
@@ -146,7 +146,7 @@ public class FileUploadUtils
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
-        int dirLastIndex = RuoYiConfig.getProfile().length() + 1;
+        int dirLastIndex = GhcConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;

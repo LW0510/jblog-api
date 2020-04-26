@@ -14,7 +14,7 @@ import com.ghc.common.utils.StringUtils;
 /**
  * Filter配置
  *
- * @author ruoyi
+ * @author ghc
  */
 @Configuration
 public class FilterConfig

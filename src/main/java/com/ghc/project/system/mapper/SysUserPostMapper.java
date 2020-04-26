@@ -6,7 +6,7 @@ import com.ghc.project.system.domain.SysUserPost;
 /**
  * 用户与岗位关联表 数据层
  * 
- * @author ruoyi
+ * @author ghc
  */
 public interface SysUserPostMapper
 {

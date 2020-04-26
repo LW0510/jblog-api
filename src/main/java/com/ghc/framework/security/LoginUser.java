@@ -10,7 +10,7 @@ import com.ghc.project.system.domain.SysUser;
 /**
  * 登录用户身份权限
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class LoginUser implements UserDetails
 {

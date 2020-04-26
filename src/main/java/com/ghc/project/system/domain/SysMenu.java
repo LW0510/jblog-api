@@ -11,7 +11,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 菜单权限表 sys_menu
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysMenu extends BaseEntity
 {

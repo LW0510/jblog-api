@@ -3,7 +3,7 @@ package com.ghc.framework.security;
 /**
  * 用户登录对象
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class LoginBody
 {

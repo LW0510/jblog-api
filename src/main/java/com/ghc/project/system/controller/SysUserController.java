@@ -33,7 +33,7 @@ import com.ghc.project.system.service.ISysUserService;
 /**
  * 用户信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/user")

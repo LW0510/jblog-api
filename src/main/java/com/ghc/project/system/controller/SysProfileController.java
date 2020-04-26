@@ -15,7 +15,7 @@ import com.ghc.common.utils.ServletUtils;
 import com.ghc.common.utils.file.FileUploadUtils;
 import com.ghc.framework.aspectj.lang.annotation.Log;
 import com.ghc.framework.aspectj.lang.enums.BusinessType;
-import com.ghc.framework.config.RuoYiConfig;
+import com.ghc.framework.config.GhcConfig;
 import com.ghc.framework.security.LoginUser;
 import com.ghc.framework.security.service.TokenService;
 import com.ghc.framework.web.controller.BaseController;
@@ -26,7 +26,7 @@ import com.ghc.project.system.service.ISysUserService;
 /**
  * 个人信息 业务处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/user/profile")
@@ -111,7 +111,7 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+            String avatar = FileUploadUtils.upload(GhcConfig.getAvatarPath(), file);
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();

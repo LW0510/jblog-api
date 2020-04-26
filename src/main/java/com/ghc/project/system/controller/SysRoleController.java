@@ -26,7 +26,7 @@ import com.ghc.project.system.service.ISysRoleService;
 /**
  * 角色信息
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/system/role")

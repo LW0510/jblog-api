@@ -25,7 +25,7 @@ import com.ghc.project.monitor.service.ISysJobService;
 /**
  * 调度任务信息操作处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestController
 @RequestMapping("/monitor/job")

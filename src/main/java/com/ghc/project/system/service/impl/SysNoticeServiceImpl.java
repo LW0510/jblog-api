@@ -10,7 +10,7 @@ import com.ghc.project.system.service.ISysNoticeService;
 /**
  * 公告 服务层实现
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService

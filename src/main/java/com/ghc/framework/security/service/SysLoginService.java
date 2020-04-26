@@ -21,7 +21,7 @@ import com.ghc.framework.security.LoginUser;
 /**
  * 登录校验方法
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Component
 public class SysLoginService

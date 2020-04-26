@@ -15,7 +15,7 @@ import com.ghc.common.utils.html.EscapeUtil;
 /**
  * XSS过滤处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
 {

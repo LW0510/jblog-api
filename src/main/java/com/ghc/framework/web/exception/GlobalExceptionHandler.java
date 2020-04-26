@@ -20,7 +20,7 @@ import com.ghc.framework.web.domain.AjaxResult;
 /**
  * 全局异常处理器
  * 
- * @author ruoyi
+ * @author ghc
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

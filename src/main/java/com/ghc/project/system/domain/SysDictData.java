@@ -12,7 +12,7 @@ import com.ghc.framework.web.domain.BaseEntity;
 /**
  * 字典数据表 sys_dict_data
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SysDictData extends BaseEntity
 {

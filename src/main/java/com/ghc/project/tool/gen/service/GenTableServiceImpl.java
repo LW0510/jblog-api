@@ -35,7 +35,7 @@ import com.ghc.project.tool.gen.util.VelocityUtils;
 /**
  * 业务 服务层实现
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Service
 public class GenTableServiceImpl implements IGenTableService

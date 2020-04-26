@@ -7,7 +7,7 @@ import com.ghc.common.utils.ServletUtils;
 /**
  * 服务相关配置
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Component
 public class ServerConfig

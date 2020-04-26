@@ -10,7 +10,7 @@ import com.ghc.project.monitor.service.ISysOperLogService;
 /**
  * 操作日志 服务层处理
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService

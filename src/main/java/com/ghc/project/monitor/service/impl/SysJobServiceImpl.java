@@ -20,7 +20,7 @@ import com.ghc.project.monitor.service.ISysJobService;
 /**
  * 定时任务调度信息 服务层
  * 
- * @author ruoyi
+ * @author ghc
  */
 @Service
 public class SysJobServiceImpl implements ISysJobService

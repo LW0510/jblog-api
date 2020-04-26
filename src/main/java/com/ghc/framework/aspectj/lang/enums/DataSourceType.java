@@ -3,7 +3,7 @@ package com.ghc.framework.aspectj.lang.enums;
 /**
  * 数据源
  * 
- * @author ruoyi
+ * @author ghc
  */
 public enum DataSourceType
 {

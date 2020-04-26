@@ -3,7 +3,7 @@ package com.ghc.common.enums;
 /**
  * 用户状态
  * 
- * @author ruoyi
+ * @author ghc
  */
 public enum UserStatus
 {

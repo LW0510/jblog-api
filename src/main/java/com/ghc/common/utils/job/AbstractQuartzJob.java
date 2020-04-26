@@ -19,7 +19,7 @@ import com.ghc.project.monitor.service.ISysJobLogService;
 /**
  * 抽象quartz调用
  *
- * @author ruoyi
+ * @author ghc
  */
 public abstract class AbstractQuartzJob implements Job
 {

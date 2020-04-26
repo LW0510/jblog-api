@@ -10,7 +10,7 @@ import com.ghc.framework.security.LoginUser;
 /**
  * 安全服务工具类
  * 
- * @author ruoyi
+ * @author ghc
  */
 public class SecurityUtils
 {

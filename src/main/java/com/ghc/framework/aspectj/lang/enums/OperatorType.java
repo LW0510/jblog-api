@@ -3,7 +3,7 @@ package com.ghc.framework.aspectj.lang.enums;
 /**
  * 操作人类别
  * 
- * @author ruoyi
+ * @author ghc
  */
 public enum OperatorType
 {
