@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jblog.project.blog.mapper.TagMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jblog.project.blog.entity.TagEntity" id="tagMap">
+        <result property="id" column="id"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="avatar" column="avatar"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="queryHotTagDetails" resultType="com.jblog.project.blog.entity.TagEntity">
+		select * from blog_tag where  id in
+        <foreach item="tagId" collection="array" open="(" separator="," close=")">
+            #{tagId}
+        </foreach>
+        ORDER BY FIELD(id,
+        <foreach item="tagId" collection="array" separator="," close=")">
+            #{tagId}
+        </foreach>
+	</select>
+
+    <select id="queryTagDetails" resultType="com.jblog.project.blog.vo.TagVo">
+        SELECT vt.*, count(vat.tag_id) as articles from blog_tag vt
+            LEFT JOIN blog_article_tag vat on vt.id = vat.tag_id
+        GROUP BY vt.id
+    </select>
+
+    <select id="queryOneTagDetail" parameterType="Integer" resultType="com.jblog.project.blog.vo.TagVo">
+        SELECT vt.*, count(vat.tag_id) as articles from blog_tag vt
+        LEFT JOIN blog_article_tag vat on vt.id = vat.tag_id
+        WHERE vat.tag_id = #{tagId}
+    </select>
+
+    <select id="selectList" resultMap="tagMap">
+        select * from blog_tag
+    </select>
+
+    <insert id="insert">
+        insert into blog_tag(
+        <if test="tagName != null and tagName != ''">tag_name,</if>
+        <if test="avatar != null and avatar != ''">avatar,</if>
+        create_time
+        )values (
+        <if test="tagName != null and tagName != ''">#{tagName},</if>
+        <if test="avatar != null and avatar != ''">#{avatar},</if>
+        sysdate()
+        )
+    </insert>
+
+    <delete id="deleteBatchIds">
+        delete from blog_tag where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateById">
+        update blog_tag
+        <set>
+            <if test="tagName != null and tagName != ''">tag_name = #{tagName},</if>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="queryTagList" resultMap="tagMap">
+        select * from blog_tag
+    </select>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jblog.project.blog.mapper.ArticleTagMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jblog.project.blog.entity.ArticleTagEntity" id="articleTagMap">
+        <result property="id" column="id"/>
+        <result property="articleId" column="article_id"/>
+        <result property="tagId" column="tag_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into blog_article_tag(
+        <if test="id != null and id != 0">id,</if>
+        <if test="articleId != null and articleId != 0">article_id,</if>
+        <if test="tagId != null and tagId != 0">tag_id,</if>
+        <if test="updateTime != null ">update_time,</if>
+        create_time
+        )values
+        <foreach item="item" collection="list" separator=",">
+            (
+                <if test="id != null and id != 0">#{id},</if>
+                <if test="articleId != null and articleId != 0">#{articleId},</if>
+                <if test="tagId != null and tagId != 0">#{tagId},</if>
+                <if test="updateTime != null ">#{updateTime},</if>
+                sysdate()
+            )
+        </foreach>
+    </insert>
+
+    <select id="queryHotTagIds" parameterType="Integer" resultType="Integer">
+        select tag_id from blog_article_tag GROUP BY tag_id ORDER BY count(*) desc
+          limit 0,#{limit}
+    </select>
+
+    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.vo.TagPageVo" resultType="com.jblog.project.blog.entity.ArticleEntity">
+        select va.* from blog_article_tag vat JOIN blog_article va on va.id = vat.article_id
+        where vat.tag_id = #{tagId} LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="queryArticleTags" parameterType="Long" resultType="com.jblog.project.blog.entity.TagEntity">
+        SELECT vt.* from blog_article_tag vat INNER JOIN blog_tag vt ON vat.tag_id=vt.id
+        where vat.article_id=#{articleId}
+    </select>
+
+    <select id="queryArticleTagList" resultMap="articleTagMap">
+        select * from blog_article_tag
+    </select>
+
+</mapper>

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ghc.framework.aspectj.lang.annotation.Log;
-import com.ghc.framework.aspectj.lang.enums.BusinessType;
+import com.jblog.framework.aspectj.lang.annotation.Log;
+import com.jblog.framework.aspectj.lang.enums.BusinessType;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
-import com.ghc.framework.web.controller.BaseController;
-import com.ghc.framework.web.domain.AjaxResult;
-import com.ghc.common.utils.poi.ExcelUtil;
+import com.jblog.framework.web.controller.BaseController;
+import com.jblog.framework.web.domain.AjaxResult;
+import com.jblog.common.utils.poi.ExcelUtil;
 #if($table.crud)
-import com.ghc.framework.web.page.TableDataInfo;
+import com.jblog.framework.web.page.TableDataInfo;
 #elseif($table.tree)
 #end
 

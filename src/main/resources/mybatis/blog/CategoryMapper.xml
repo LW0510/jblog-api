@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jblog.project.blog.mapper.CategoryMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jblog.project.blog.entity.CategoryEntity" id="categoryMap">
+        <result property="id" column="id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="avatar" column="avatar"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="queryCategoryDetails" resultType="com.jblog.project.blog.vo.CategoryVo">
+        select c.*, count(a.category_id) as articles from blog_category c
+            left join blog_article a on a.category_id = c.id
+        group by c.id
+    </select>
+
+    <select id="queryOneCategoryDetail" parameterType="Integer" resultType="com.jblog.project.blog.vo.CategoryVo">
+        select c.*, count(a.category_id) as articles from blog_category c
+        left join blog_article a on a.category_id = c.id
+        where a.category_id = #{categoryId}
+    </select>
+
+    <select id="selectById" resultType="com.jblog.project.blog.entity.CategoryEntity">
+        select * from blog_category where id = #{0}
+    </select>
+
+    <select id="queryCategoryList" resultMap="categoryMap">
+        select * from blog_category
+    </select>
+
+    <insert id="insert">
+        insert into blog_category(
+        <if test="categoryName != null and categoryName != ''">category_name,</if>
+        <if test="avatar != null and avatar != ''">avatar,</if>
+        <if test="description != null and description != ''">description,</if>
+        create_time
+        )values (
+        <if test="categoryName != null and categoryName != ''">#{userId},</if>
+        <if test="avatar != null and avatar != ''">#{avatar},</if>
+        <if test="description != null">#{description},</if>
+        sysdate()
+        )
+    </insert>
+
+    <update id="updateById">
+        update blog_category
+        <set>
+            <if test="categoryName != null and categoryName != ''">category_name = #{categoryName},</if>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBatchIds">
+        delete from blog_category where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+</mapper>

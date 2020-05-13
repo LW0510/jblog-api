@@ -1,0 +1,15 @@
+package com.jblog.common.exception;
+
+/**
+ * 演示模式异常
+ * 
+ * @author jblog
+ */
+public class DemoModeException extends RuntimeException
+{
+    private static final long serialVersionUID = 1L;
+
+    public DemoModeException()
+    {
+    }
+}
