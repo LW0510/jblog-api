@@ -24,7 +24,6 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into blog_article(
         <if test="userId != null and userId != 0">user_id,</if>
-        <if test="userName != null and userName != ''">user_name,</if>
         <if test="nickName != null and nickName != ''">nick_name,</if>
         <if test="title != null and title != ''">title,</if>
         <if test="summary != null and summary != ''">summary,</if>
@@ -39,7 +38,6 @@
         create_time
         )values(
         <if test="userId != null and userId != 0">#{userId},</if>
-        <if test="userName != null and userName != ''">#{userName},</if>
         <if test="nickName != null and nickName != ''">#{nickName},</if>
         <if test="title != null and title != ''">#{title},</if>
         <if test="summary != null and summary != ''">#{summary},</if>

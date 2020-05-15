@@ -8,11 +8,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * 
  * @author jblog
  */
-public class IRCSServletInitializer extends SpringBootServletInitializer
+public class JBLOGServletInitializer extends SpringBootServletInitializer
 {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
     {
-        return application.sources(IRCSApplication.class);
+        return application.sources(JBLOGApplication.class);
     }
 }

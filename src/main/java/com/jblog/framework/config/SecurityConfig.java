@@ -1,5 +1,6 @@
 package com.jblog.framework.config;
 
+import com.jblog.framework.security.service.AnonymousAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -80,7 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity httpSecurity) throws Exception
     {
 
-//        httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
         httpSecurity
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
@@ -99,19 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
-                .antMatchers("/profile/**").anonymous()
-                .antMatchers("/common/download**").anonymous()
-                .antMatchers("/common/download/resource**").anonymous()
-                .antMatchers("/swagger-ui.html").anonymous()
-                .antMatchers("/swagger-resources/**").anonymous()
-                .antMatchers("/webjars/**").anonymous()
-                .antMatchers("/*/api-docs").anonymous()
-                .antMatchers("/druid/**").anonymous()
-                .antMatchers("/captchaImage").anonymous()
-                .antMatchers("/login").anonymous()
-                .antMatchers("/article/list","/tags/hot",
-                        "/article/hot","/article/new","/article/archives","/article/view/**",
-                        "/tags/detail/**","/category/detail/**").anonymous()
+                .antMatchers(AnonymousAccessService.getAnonymousAccessUrl()).anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

@@ -21,7 +21,6 @@ public class ArticleTagEntity implements Serializable {
 	/**
 	 * 主键ID
 	 */
-	//@TableId
 	private Long id;
 	/**
 	 * 文章ID

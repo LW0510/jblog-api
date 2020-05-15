@@ -12,12 +12,12 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @MapperScan("com.jblog.project.blog.mapper")
-public class IRCSApplication
+public class JBLOGApplication
 {
     public static void main(String[] args)
     {
         System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(IRCSApplication.class, args);
+        SpringApplication.run(JBLOGApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  启动成功   ლ(´ڡ`ლ)ﾞ  \n" );
     }
 }

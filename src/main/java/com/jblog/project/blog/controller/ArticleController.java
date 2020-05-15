@@ -121,8 +121,8 @@ public class ArticleController {
      * <p>
      * 要增加文章阅读数
      */
-    @GetMapping("/view/{id}")
-    public AjaxResult oneArticleInfo(@PathVariable("id") Long id) {
+    @GetMapping("/view")
+    public AjaxResult oneArticleInfo(@RequestParam("id") Long id) {
         JSONObject detailAndAddViewNum = articleService.getArticleDetailAndAddViewNum(id);
         return AjaxResult.success(detailAndAddViewNum);
     }
@@ -133,8 +133,8 @@ public class ArticleController {
      * 通过文章Id获取文章详情
      * 不需要用户信息
      */
-    @GetMapping("/{id}")
-    public AjaxResult getArticleById(@PathVariable("id") Long id) {
+    @GetMapping("/getArticle")
+    public AjaxResult getArticleById(@RequestParam("id") Long id) {
         ArticleEntity article = articleService.selectById(id);
         JSONObject object = new JSONObject();
         object.put("id", article.getId());
