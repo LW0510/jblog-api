@@ -6,6 +6,7 @@ import com.jblog.project.blog.entity.ArticleTagEntity;
 import com.jblog.project.blog.entity.TagEntity;
 import com.jblog.project.blog.vo.TagPageVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public interface ArticleTagMapper{
      * 批量插入 articleTag
      * @param articleTagEntityList
      */
-    void insertBatch(List<ArticleTagEntity> articleTagEntityList);
+    void insertBatch(@Param("articleTagList") List<ArticleTagEntity> articleTagEntityList);
 
 
     List<ArticleTagEntity> queryArticleTagList();

@@ -13,22 +13,17 @@
     </resultMap>
 
     <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
-        insert into blog_article_tag(
-        <if test="id != null and id != 0">id,</if>
-        <if test="articleId != null and articleId != 0">article_id,</if>
-        <if test="tagId != null and tagId != 0">tag_id,</if>
-        <if test="updateTime != null ">update_time,</if>
-        create_time
+        insert into blog_article_tag(article_id,tag_id,create_time,update_time
         )values
-        <foreach item="item" collection="list" separator=",">
+        <foreach item="item" collection="articleTagList" separator=",">
             (
-                <if test="id != null and id != 0">#{id},</if>
-                <if test="articleId != null and articleId != 0">#{articleId},</if>
-                <if test="tagId != null and tagId != 0">#{tagId},</if>
-                <if test="updateTime != null ">#{updateTime},</if>
-                sysdate()
+            #{item.articleId},
+            #{item.tagId},
+            sysdate(),
+            sysdate()
             )
         </foreach>
+
     </insert>
 
     <select id="queryHotTagIds" parameterType="Integer" resultType="Integer">
