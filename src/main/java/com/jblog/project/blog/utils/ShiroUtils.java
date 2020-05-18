@@ -5,8 +5,8 @@
 ///**
 // * Shiro工具类
 // *
-// * @author liangfeihu
-// * @email liangfeihu@163.com
+// * @author shadow
+// * @email shadow@163.com
 // * @date 2016年11月12日 上午9:49:19
 // */
 //public class ShiroUtils {

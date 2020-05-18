@@ -140,5 +140,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{roleId}
         </foreach> 
  	</delete>
- 	
+
+    <select id="selectRoleByRoleKey" resultType="com.jblog.project.system.domain.SysRole">
+		<include refid="selectRoleVo"/>
+		where r.role_key=#{roleKey}
+	</select>
+
 </mapper> 

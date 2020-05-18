@@ -9,7 +9,7 @@ package com.jblog.project.blog.service;//package com.weiframework.project.blog.s
 ///**
 // * 系统用户Token
 // *
-// * @author liangfeihu
+// * @author shadow
 // * @email liangfhhd@163.com
 // * @date 2018-07-04 15:00:54
 // */

@@ -86,6 +86,9 @@
 
     <select id="queryArticleList" resultMap="articleMap">
         select * from blog_article
+        <where>
+            <if test="categoryId != null">category_id = #{categoryId}</if>
+        </where>
     </select>
 
     <select id="selectById" resultMap="articleMap">

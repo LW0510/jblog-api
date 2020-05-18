@@ -4,7 +4,7 @@ package com.jblog.project.blog.mapper;
 import com.jblog.project.blog.entity.ArticleEntity;
 import com.jblog.project.blog.entity.ArticleTagEntity;
 import com.jblog.project.blog.entity.TagEntity;
-import com.jblog.project.blog.vo.TagPageVo;
+import com.jblog.project.blog.vo.PageCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,10 +27,10 @@ public interface ArticleTagMapper{
     /**
      * 根据标签查询文章
      *
-     * @param tagPageVo
+     * @param tagId
      * @return
      */
-    List<ArticleEntity> queryArticlesByTag(TagPageVo tagPageVo);
+    List<ArticleEntity> queryArticlesByTag(@Param("tagId") Integer tagId);
 
     /**
      * 获取文章所有标签

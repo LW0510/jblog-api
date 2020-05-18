@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.ServletUtils;
+import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.framework.security.LoginUser;
 import com.jblog.framework.security.service.TokenService;
 import com.jblog.framework.web.domain.AjaxResult;
@@ -47,11 +48,14 @@ public class CommentController {
     /**
      * 获取某篇文章的评论
      */
-    @RequestMapping("/article/{id}")
-    public AjaxResult info(@PathVariable("id") Long id) {
+    @RequestMapping("/article/info")
+    public AjaxResult info(@RequestParam("id") Long id) {
+
+        String url = AddressUtils.getCurrApiAddress();
         List<CommentVo> commentVos = commentService.queryArticleComments(id);
         JSONArray array = new JSONArray();
         for (CommentVo vo : commentVos) {
+            vo.setAvatar(url+"avatar/"+vo.getAvatar());
             JSONObject object = formatCommentInfo(vo);
 
 //            EntityWrapper<CommentEntity> entityWrapper = new EntityWrapper<>();

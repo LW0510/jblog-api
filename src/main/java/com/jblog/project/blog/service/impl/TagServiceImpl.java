@@ -1,6 +1,7 @@
 package com.jblog.project.blog.service.impl;
 
 
+import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.project.blog.mapper.TagMapper;
 import com.jblog.project.blog.entity.TagEntity;
 import com.jblog.project.blog.service.TagService;
@@ -14,7 +15,7 @@ import java.util.Map;
 /**
  * 标签表
  *
- * @author liangfeihu
+ * @author shadow
  * @email liangfhhd@163.com
  * @date 2018-07-04 15:00:54
  */
@@ -57,7 +58,12 @@ public class TagServiceImpl implements TagService {
      */
     @Override
     public List<TagVo> queryTagDetails() {
-        return tagMapper.queryTagDetails();
+        String url = AddressUtils.getCurrApiAddress();
+        List<TagVo> tagVoList = tagMapper.queryTagDetails();
+        for(TagVo tagVo : tagVoList){
+            tagVo.setAvatar(url+"avatar/"+tagVo.getAvatar());
+        }
+        return tagVoList;
     }
 
     /**
@@ -67,7 +73,10 @@ public class TagServiceImpl implements TagService {
      */
     @Override
     public TagVo queryOneTagDetail(Integer tagId) {
-        return tagMapper.queryOneTagDetail(tagId);
+        String url = AddressUtils.getCurrApiAddress();
+        TagVo tag = tagMapper.queryOneTagDetail(tagId);
+        tag.setAvatar(url+"avatar/"+tag.getAvatar());
+        return tag;
     }
 
 

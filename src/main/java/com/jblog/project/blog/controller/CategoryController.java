@@ -1,6 +1,7 @@
 package com.jblog.project.blog.controller;
 
 
+import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.blog.entity.CategoryEntity;
 import com.jblog.project.blog.service.CategoryService;
@@ -45,8 +46,10 @@ public class CategoryController {
      * 单条分类详情
      */
     @GetMapping("/detail/info")
-    public AjaxResult detailById(@RequestParam("categoryId") Integer categoryId) {
+    public AjaxResult detailById(@RequestParam("id") Integer categoryId) {
+        String url = AddressUtils.getCurrApiAddress();
         CategoryVo categoryVo = categoryService.queryOneCategoryDetail(categoryId);
+        categoryVo.setAvatar(url+"avatar/"+categoryVo.getAvatar());
         return AjaxResult.success(categoryVo);
     }
 

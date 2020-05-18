@@ -22,7 +22,7 @@
     </select>
 
     <select id="queryChildrenComments" parameterType="com.jblog.project.blog.dto.ChildCommentDto" resultType="com.jblog.project.blog.vo.CommentVo">
-        SELECT vc.*, vu.avatar,vu.nickname FROM blog_comment vc LEFT JOIN blog_user vu ON vc.user_id=vu.id
+        SELECT vc.*, vu.avatar,vu.nick_name FROM blog_comment vc LEFT JOIN sys_user vu ON vc.user_id=vu.user_id
         WHERE vc.article_id=#{articleId} AND vc.parent_id=#{parentId} ORDER BY vc.create_time ASC
     </select>
 

@@ -64,7 +64,7 @@ public class TagController {
      * 单条标签详情
      */
     @GetMapping("/detail/info")
-    public AjaxResult detailById(@RequestParam("tagId") Integer tagId) {
+    public AjaxResult detailById(@RequestParam("id") Integer tagId) {
         TagVo tagVo = tagService.queryOneTagDetail(tagId);
         return AjaxResult.success(tagVo);
     }

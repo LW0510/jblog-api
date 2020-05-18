@@ -58,7 +58,7 @@ public class FileUploadUtils
     {
         try
         {
-            return upload(getDefaultBaseDir(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+            return upload(getDefaultBaseDir(), null,file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         }
         catch (Exception e)
         {
@@ -78,7 +78,28 @@ public class FileUploadUtils
     {
         try
         {
-            return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+            return upload(baseDir, null,file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        }
+        catch (Exception e)
+        {
+            throw new IOException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 根据文件路径上传
+     *
+     * @param baseDir 相对应用的基目录
+     * @Param myFileName 自定义文件名
+     * @param file 上传的文件
+     * @return 文件名称
+     * @throws IOException
+     */
+    public static final String upload(String baseDir,String myFileName, MultipartFile file) throws IOException
+    {
+        try
+        {
+            return upload(baseDir, myFileName,file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         }
         catch (Exception e)
         {
@@ -90,6 +111,7 @@ public class FileUploadUtils
      * 文件上传
      *
      * @param baseDir 相对应用的基目录
+     * @Param myFileName 自定义文件名
      * @param file 上传的文件
      * @param extension 上传文件类型
      * @return 返回上传成功的文件名
@@ -98,7 +120,7 @@ public class FileUploadUtils
      * @throws IOException 比如读写文件出错时
      * @throws InvalidExtensionException 文件校验异常
      */
-    public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
+    public static final String upload(String baseDir, String myFileName, MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
             InvalidExtensionException
     {
@@ -110,7 +132,13 @@ public class FileUploadUtils
 
         assertAllowed(file, allowedExtension);
 
-        String fileName = extractFilename(file);
+        // 未给定自定义文件名，取文件原始名
+        String fileName = null;
+        if(StringUtils.isEmpty(myFileName)){
+            fileName = extractFilename(file);
+        }else{
+         fileName = extractFilename(file,myFileName);
+        }
 
         File desc = getAbsoluteFile(baseDir, fileName);
         file.transferTo(desc);
@@ -128,6 +156,19 @@ public class FileUploadUtils
         fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
         return fileName;
     }
+
+
+    /**
+     * 编码文件名
+     */
+    public static final String extractFilename(MultipartFile file,String myFileName)
+    {
+        String extension = getExtension(file);
+        myFileName = DateUtils.datePath() + "/" + encodingFilename(myFileName+extension) + "." + extension;
+        return myFileName;
+    }
+
+
 
     private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
     {

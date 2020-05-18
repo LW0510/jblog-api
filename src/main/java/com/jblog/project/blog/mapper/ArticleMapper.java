@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 文章表
  *
- * @author liangfeihu
+ * @author shadow
  * @email liangfhhd@163.com
  * @date 2018-07-04 15:00:55
  */

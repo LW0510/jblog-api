@@ -199,7 +199,7 @@
 //    /**
 //     * 退出登录
 //     *
-//     * @author liangfeihu
+//     * @author shadow
 //     * @since 2018/7/1 15:30.
 //     */
 //    @RequestMapping(value = "/logout", method = RequestMethod.GET)

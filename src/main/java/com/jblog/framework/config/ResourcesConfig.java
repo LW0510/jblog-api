@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.jblog.common.constant.Constants;
 import com.jblog.framework.interceptor.RepeatSubmitInterceptor;
 
+import java.io.File;
+
 /**
  * 通用配置
  * 
@@ -22,12 +24,17 @@ public class ResourcesConfig implements WebMvcConfigurer
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
+
         /** 本地文件上传路径 */
-        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**").addResourceLocations("file:" + GhcConfig.getProfile() + "/");
+        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**").addResourceLocations("file:" + GhcConfig.getProfile() + File.separator);
+
+        /** 本地上传的头像路径 */
+        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/avatar/**").addResourceLocations("file:" + GhcConfig.getAvatarPath() + File.separator);
 
         /** swagger配置 */
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
     }
 
     /**

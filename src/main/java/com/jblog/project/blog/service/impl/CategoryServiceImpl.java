@@ -1,6 +1,7 @@
 package com.jblog.project.blog.service.impl;
 
 
+import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.project.blog.mapper.CategoryMapper;
 import com.jblog.project.blog.entity.CategoryEntity;
 import com.jblog.project.blog.service.CategoryService;
@@ -14,7 +15,7 @@ import java.util.Map;
 /**
  * 文章类别表
  *
- * @author liangfeihu
+ * @author shadow
  * @email liangfhhd@163.com
  * @date 2018-07-04 15:00:54
  */
@@ -32,7 +33,12 @@ public class CategoryServiceImpl implements CategoryService {
 //        );
 
 //        return new PageUtils(page);
-        return categoryMapper.queryCategoryList(params);
+        String url = AddressUtils.getCurrApiAddress();
+        List<CategoryEntity> categoryEntities = categoryMapper.queryCategoryList(params);
+        for(CategoryEntity categoryEntity: categoryEntities){
+            categoryEntity.setAvatar(url+"avatar/"+categoryEntity.getAvatar());
+        }
+        return categoryEntities;
     }
 
     /**
@@ -42,7 +48,12 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public List<CategoryVo> queryCategoryDetails() {
-        return categoryMapper.queryCategoryDetails();
+        String url = AddressUtils.getCurrApiAddress();
+        List<CategoryVo> categoryVoList = categoryMapper.queryCategoryDetails();
+        for(CategoryVo categoryVo: categoryVoList){
+            categoryVo.setAvatar(url+"avatar/"+categoryVo.getAvatar());
+        }
+        return categoryVoList;
     }
 
     /**

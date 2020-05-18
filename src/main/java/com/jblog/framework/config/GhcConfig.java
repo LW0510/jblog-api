@@ -1,7 +1,10 @@
 package com.jblog.framework.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
 
 /**
  * 读取项目相关配置
@@ -9,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @author jblog
  */
 @Component
-@ConfigurationProperties(prefix = "jblog")
+@ConfigurationProperties(prefix = "ghc")
 public class GhcConfig
 {
     /** 项目名称 */
@@ -95,7 +98,7 @@ public class GhcConfig
      */
     public static String getAvatarPath()
     {
-        return getProfile() + "/avatar";
+        return getProfile() + File.separator + "avatar" + File.separator;
     }
 
     /**
@@ -103,7 +106,7 @@ public class GhcConfig
      */
     public static String getDownloadPath()
     {
-        return getProfile() + "/download/";
+        return getProfile() + File.separator + "download" + File.separator;
     }
 
     /**
@@ -111,6 +114,6 @@ public class GhcConfig
      */
     public static String getUploadPath()
     {
-        return getProfile() + "/upload";
+        return getProfile() + File.separator + "upload"+ File.separator;
     }
 }

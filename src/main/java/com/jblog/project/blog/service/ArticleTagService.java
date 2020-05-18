@@ -3,7 +3,6 @@ package com.jblog.project.blog.service;
 import com.jblog.project.blog.entity.ArticleEntity;
 import com.jblog.project.blog.entity.ArticleTagEntity;
 import com.jblog.project.blog.entity.TagEntity;
-import com.jblog.project.blog.vo.TagPageVo;
 
 import java.util.List;
 import java.util.Map;
@@ -26,10 +25,10 @@ public interface ArticleTagService {
     /**
      * 根据标签查询文章
      *
-     * @param tagPageVo
+     * @param params
      * @return
      */
-    List<ArticleEntity> queryArticlesByTag(TagPageVo tagPageVo);
+    List<ArticleEntity> queryArticlesByTag(Map<String, Object> params);
 
     /**
      * 获取文章所有标签

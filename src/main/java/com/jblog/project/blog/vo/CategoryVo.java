@@ -6,7 +6,7 @@ import com.jblog.project.blog.entity.CategoryEntity;
 /**
  * 文章分类
  *
- * @author liangfeihu
+ * @author shadow
  * @since 2018/7/7 14:57.
  */
 public class CategoryVo extends CategoryEntity {

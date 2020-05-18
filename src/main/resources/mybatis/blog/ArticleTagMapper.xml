@@ -31,9 +31,9 @@
           limit 0,#{limit}
     </select>
 
-    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.vo.TagPageVo" resultType="com.jblog.project.blog.entity.ArticleEntity">
+    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.vo.PageCondition" resultType="com.jblog.project.blog.entity.ArticleEntity">
         select va.* from blog_article_tag vat JOIN blog_article va on va.id = vat.article_id
-        where vat.tag_id = #{tagId} LIMIT #{offset}, #{pageSize}
+        where vat.tag_id = #{tagId}
     </select>
 
     <select id="queryArticleTags" parameterType="Long" resultType="com.jblog.project.blog.entity.TagEntity">

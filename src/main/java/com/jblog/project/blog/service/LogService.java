@@ -7,7 +7,7 @@ package com.jblog.project.blog.service;//package com.weiframework.project.blog.s
 ///**
 // * 用户操作日志表
 // *
-// * @author liangfeihu
+// * @author shadow
 // * @email liangfhhd@163.com
 // * @date 2018-07-04 15:00:54
 // */

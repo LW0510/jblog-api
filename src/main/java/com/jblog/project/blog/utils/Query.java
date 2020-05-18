@@ -9,7 +9,7 @@
 ///**
 // * 查询参数
 // *
-// * @author liangfeihu@163.com
+// * @author shadow@163.com
 // * @since 2.0.0 2017-03-14
 // */
 //public class Query<T> extends LinkedHashMap<String, Object> {

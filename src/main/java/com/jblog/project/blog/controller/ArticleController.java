@@ -13,13 +13,12 @@ import com.jblog.project.blog.service.ArticleService;
 import com.jblog.project.blog.service.ArticleTagService;
 import com.jblog.project.blog.service.CategoryService;
 import com.jblog.project.blog.vo.ArticleArchivesVo;
-import com.jblog.project.blog.vo.TagPageVo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,14 +45,22 @@ public class ArticleController {
      * 列表 分页查询
      */
     @GetMapping("/list")
-    public AjaxResult list(Map<String, Object> params) {
-        params.put("sidx", "view_num");
-        params.put("order", "DESC");
-        String tagIdStr = (String) params.get("tagId");
-        if (StringUtils.isNotBlank(tagIdStr)) {
-            Integer tagId = Integer.parseInt(tagIdStr);
-            TagPageVo tagPageVo = getTagPageVo(params, tagId);
-            List<ArticleEntity> articleEntities = articleTagService.queryArticlesByTag(tagPageVo);
+    public AjaxResult list(@RequestParam(value = "pageNum",required = false) Integer pageNum,
+                           @RequestParam(value = "pageSize",required = false) Integer pageSize,
+                           @RequestParam(value = "orderField",required = false) String orderField,
+                           @RequestParam(value = "order",required = false) String order,
+                           @RequestParam(value = "tagId",required = false) Integer tagId,
+                           @RequestParam(value = "categoryId",required = false) Integer categoryId) {
+
+        Map<String,Object> params = new HashMap<>(16);
+        params.put("pageNum",pageNum);
+        params.put("pageSize",pageSize);
+        params.put("orderField",orderField);
+        params.put("order",order);
+        params.put("categoryId",categoryId);
+        if (tagId != null) {
+            params.put("tagId",tagId);
+            List<ArticleEntity> articleEntities = articleTagService.queryArticlesByTag(params);
             JSONArray array = articleService.getFormatArticleList(articleEntities);
             return AjaxResult.success(array);
         }
@@ -63,28 +70,6 @@ public class ArticleController {
         return AjaxResult.success(array);
     }
 
-    /**
-     * 构造分页参数
-     *
-     * @param params
-     * @param tagId
-     * @return
-     */
-    private TagPageVo getTagPageVo(Map<String, Object> params, Integer tagId) {
-        Integer pageNo = 1;
-        Integer pageSize = 10;
-        //分页参数
-        if (params.get("pageNo") != null) {
-            pageNo = Integer.parseInt((String) params.get("pageNo"));
-        }
-        if (params.get("pageSize") != null) {
-            pageSize = Integer.parseInt((String) params.get("pageSize"));
-        }
-
-        Integer offset = (pageNo - 1) * pageSize;
-        TagPageVo tagPageVo = new TagPageVo(offset, pageSize, tagId);
-        return tagPageVo;
-    }
 
     /**
      * 最热文章

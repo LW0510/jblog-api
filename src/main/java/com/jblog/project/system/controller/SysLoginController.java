@@ -2,6 +2,8 @@ package com.jblog.project.system.controller;
 
 import java.util.List;
 import java.util.Set;
+
+import com.jblog.common.utils.ip.AddressUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,9 @@ import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.system.domain.SysMenu;
 import com.jblog.project.system.domain.SysUser;
 import com.jblog.project.system.service.ISysMenuService;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 登录验证
@@ -67,6 +72,7 @@ public class SysLoginController
     @GetMapping("/getInfo")
     public AjaxResult getInfo()
     {
+
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         SysUser user = loginUser.getUser();
         // 角色集合
@@ -74,9 +80,11 @@ public class SysLoginController
         // 权限集合
         Set<String> permissions = permissionService.getMenuPermission(user);
         AjaxResult ajax = AjaxResult.success();
+        user.setAvatar(AddressUtils.getCurrApiAddress()+"avatar/"+user.getAvatar());
         ajax.put("user", user);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
+
         return ajax;
     }
 

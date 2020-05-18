@@ -7,7 +7,7 @@ package com.jblog.project.blog.mapper;//package com.weiframework.project.blog.co
 ///**
 // * 系统用户Token
 // *
-// * @author liangfeihu
+// * @author shadow
 // * @email liangfhhd@163.com
 // * @date 2018-07-04 15:00:54
 // */

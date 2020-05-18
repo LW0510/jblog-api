@@ -5,9 +5,12 @@ package com.jblog.project.blog.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jblog.common.exception.CustomException;
+import com.jblog.common.utils.DateUtils;
+import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.project.blog.mapper.ArticleMapper;
 import com.jblog.project.blog.entity.*;
 import com.jblog.project.blog.service.*;
+import com.jblog.project.blog.utils.PageUtils;
 import com.jblog.project.blog.vo.ArticleArchivesVo;
 import com.jblog.project.system.domain.SysUser;
 import com.jblog.project.system.service.ISysUserService;
@@ -24,7 +27,7 @@ import static com.jblog.project.blog.controller.ArticleController.HOT_OR_NEW_ART
 /**
  * 文章表
  *
- * @author liangfeihu
+ * @author shadow
  * @email liangfhhd@163.com
  * @date 2018-07-04 15:00:55
  */
@@ -67,8 +70,9 @@ public class ArticleServiceImpl implements ArticleService {
 //
 //        return page.getRecords();
 
-
-        return articleMapper.queryArticleList(params);
+        PageUtils.startMyPage(params);
+        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleMapper.queryArticleList(params));
+        return pageInfo.getList();
     }
 
     /**
@@ -100,7 +104,7 @@ public class ArticleServiceImpl implements ArticleService {
             object.put("summary", article.getSummary());
             object.put("weight", article.getWeight());
             object.put("tags", article.getTagArray());
-            object.put("createTime", article.getCreateTime());
+            object.put("createTime", DateUtils.dateTime(article.getCreateTime()));
             object.put("viewNum", article.getViewNum());
             object.put("commentNum", article.getCommentNum());
 
@@ -128,7 +132,7 @@ public class ArticleServiceImpl implements ArticleService {
         object.put("id", article.getId());
         object.put("title", article.getTitle());
         object.put("summary", article.getSummary());
-        object.put("createTime", article.getCreateTime());
+        object.put("createTime", DateUtils.dateTime(article.getCreateTime()));
 
         article.setViewNum(article.getViewNum() + 1);
         object.put("viewNum", article.getViewNum());
@@ -139,7 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
         SysUser sysUser = userService.selectUserById(article.getUserId());
         JSONObject user = new JSONObject();
         user.put("id", sysUser.getUserId());
-        user.put("avatar", sysUser.getAvatar());
+        user.put("avatar", AddressUtils.getCurrApiAddress()+"avatar/"+sysUser.getAvatar());
         user.put("nickname", sysUser.getNickName());
         object.put("author", user);
 

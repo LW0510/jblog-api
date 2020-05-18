@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * 密码表单
  *
- * @author liangfeihu@163.com
+ * @author shadow@163.com
  * @since  2018-01-25
  */
 @Getter

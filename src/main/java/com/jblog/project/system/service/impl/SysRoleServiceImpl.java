@@ -98,6 +98,16 @@ public class SysRoleServiceImpl implements ISysRoleService
     }
 
     /**
+     * 通过 role_key 查询角色
+     * @param roleKey
+     * @return
+     */
+    @Override
+    public SysRole selectRoleByRoleKey(String roleKey) {
+        return roleMapper.selectRoleByRoleKey(roleKey);
+    }
+
+    /**
      * 通过角色ID查询角色
      * 
      * @param roleId 角色ID

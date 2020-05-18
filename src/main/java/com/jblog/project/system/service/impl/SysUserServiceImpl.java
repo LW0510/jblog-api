@@ -213,7 +213,7 @@ public class SysUserServiceImpl implements ISysUserService
         // 新增用户信息
         int rows = userMapper.insertUser(user);
         // 新增用户岗位关联
-        insertUserPost(user);
+//        insertUserPost(user);
         // 新增用户与角色管理
         insertUserRole(user);
         return rows;
@@ -313,7 +313,7 @@ public class SysUserServiceImpl implements ISysUserService
         if (StringUtils.isNotNull(roles))
         {
             // 新增用户与角色管理
-            List<SysUserRole> list = new ArrayList<SysUserRole>();
+            List<SysUserRole> list = new ArrayList<>();
             for (Long roleId : roles)
             {
                 SysUserRole ur = new SysUserRole();

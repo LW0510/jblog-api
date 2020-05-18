@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 全局获取http请求相关
  *
- * @author liangfeihu
+ * @author shadow
  * @since 2018/6/26 13:17.
  */
 public class HttpContextUtils {
