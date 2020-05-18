@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jblog.project.blog.mapper.TagMapper">
+<mapper namespace="com.jblog.project.blog.tag.mapper.TagMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.jblog.project.blog.entity.TagEntity" id="tagMap">
+    <resultMap type="com.jblog.project.blog.tag.domain.TagEntity" id="tagMap">
         <result property="id" column="id"/>
         <result property="tagName" column="tag_name"/>
         <result property="avatar" column="avatar"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
-    <select id="queryHotTagDetails" resultType="com.jblog.project.blog.entity.TagEntity">
+    <select id="queryHotTagDetails" resultType="com.jblog.project.blog.tag.domain.TagEntity">
 		select * from blog_tag where  id in
         <foreach item="tagId" collection="array" open="(" separator="," close=")">
             #{tagId}
@@ -22,13 +22,13 @@
         </foreach>
 	</select>
 
-    <select id="queryTagDetails" resultType="com.jblog.project.blog.vo.TagVo">
+    <select id="queryTagDetails" resultType="com.jblog.project.blog.tag.domain.vo.TagVo">
         SELECT vt.*, count(vat.tag_id) as articles from blog_tag vt
             LEFT JOIN blog_article_tag vat on vt.id = vat.tag_id
         GROUP BY vt.id
     </select>
 
-    <select id="queryOneTagDetail" parameterType="Integer" resultType="com.jblog.project.blog.vo.TagVo">
+    <select id="queryOneTagDetail" parameterType="Integer" resultType="com.jblog.project.blog.tag.domain.vo.TagVo">
         SELECT vt.*, count(vat.tag_id) as articles from blog_tag vt
         LEFT JOIN blog_article_tag vat on vt.id = vat.tag_id
         WHERE vat.tag_id = #{tagId}

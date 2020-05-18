@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jblog.project.blog.mapper.ArticleTagMapper">
+<mapper namespace="com.jblog.project.blog.article.mapper.ArticleTagMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.jblog.project.blog.entity.ArticleTagEntity" id="articleTagMap">
+    <resultMap type="com.jblog.project.blog.article.domain.ArticleTagEntity" id="articleTagMap">
         <result property="id" column="id"/>
         <result property="articleId" column="article_id"/>
         <result property="tagId" column="tag_id"/>
@@ -31,12 +31,12 @@
           limit 0,#{limit}
     </select>
 
-    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.vo.PageCondition" resultType="com.jblog.project.blog.entity.ArticleEntity">
+    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.utils.PageUtils$PageConditionForm" resultType="com.jblog.project.blog.article.domain.ArticleEntity">
         select va.* from blog_article_tag vat JOIN blog_article va on va.id = vat.article_id
         where vat.tag_id = #{tagId}
     </select>
 
-    <select id="queryArticleTags" parameterType="Long" resultType="com.jblog.project.blog.entity.TagEntity">
+    <select id="queryArticleTags" parameterType="Long" resultType="com.jblog.project.blog.tag.domain.TagEntity">
         SELECT vt.* from blog_article_tag vat INNER JOIN blog_tag vt ON vat.tag_id=vt.id
         where vat.article_id=#{articleId}
     </select>

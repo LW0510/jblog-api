@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jblog.project.blog.mapper.CommentMapper">
+<mapper namespace="com.jblog.project.blog.comment.mapper.CommentMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.jblog.project.blog.entity.CommentEntity" id="commentMap">
+    <resultMap type="com.jblog.project.blog.comment.domain.CommentEntity" id="commentMap">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="articleId" column="article_id"/>
@@ -16,12 +16,12 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="queryArticleComments"  parameterType="Long" resultType="com.jblog.project.blog.vo.CommentVo">
+    <select id="queryArticleComments"  parameterType="Long" resultType="com.jblog.project.blog.comment.domain.vo.CommentVo">
         SELECT vc.*, vu.avatar,vu.nick_name FROM blog_comment vc LEFT JOIN sys_user vu ON vc.user_id=vu.user_id
         WHERE vc.article_id=#{articleIAd} AND vc.level_flag='0' ORDER BY vc.create_time DESC
     </select>
 
-    <select id="queryChildrenComments" parameterType="com.jblog.project.blog.dto.ChildCommentDto" resultType="com.jblog.project.blog.vo.CommentVo">
+    <select id="queryChildrenComments" parameterType="com.jblog.project.blog.common.domain.vo.ChildCommentVo" resultType="com.jblog.project.blog.comment.domain.vo.CommentVo">
         SELECT vc.*, vu.avatar,vu.nick_name FROM blog_comment vc LEFT JOIN sys_user vu ON vc.user_id=vu.user_id
         WHERE vc.article_id=#{articleId} AND vc.parent_id=#{parentId} ORDER BY vc.create_time ASC
     </select>

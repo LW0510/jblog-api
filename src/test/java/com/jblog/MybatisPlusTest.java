@@ -1,7 +1,7 @@
 package com.jblog;
 
-import com.jblog.project.blog.mapper.ArticleMapper;
-import com.jblog.project.blog.mapper.CategoryMapper;
+import com.jblog.project.blog.article.mapper.ArticleMapper;
+import com.jblog.project.blog.category.mapper.CategoryMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

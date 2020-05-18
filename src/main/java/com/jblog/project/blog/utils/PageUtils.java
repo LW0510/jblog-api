@@ -3,7 +3,8 @@ package com.jblog.project.blog.utils;
 
 import com.github.pagehelper.PageHelper;
 import com.jblog.common.utils.StringUtils;
-import com.jblog.project.blog.vo.PageCondition;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -28,6 +29,38 @@ public class PageUtils implements Serializable {
     private int currPage;
     //列表数据
     private List<?> list;
+
+
+    /**
+     * PageConditionForm 可被接收排序参数的类继承
+     */
+    @Getter
+    @Setter
+    public static class PageConditionForm{
+        /** 当前页*/
+        private Integer pageNum;
+        /** 页大小*/
+        private Integer pageSize;
+        /** 排序字段（如 name,age）*/
+        private String orderField;
+        /** 排序关键字 desc、asc */
+        private String order;
+
+        /** 是否有指定字段排序条件（默认false）*/
+        private boolean orderFlag;
+        /** 构造的 orderBy 语句 */
+        private String orderByStatement;
+    }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 分页
@@ -68,8 +101,8 @@ public class PageUtils implements Serializable {
      * @param String order
      * @return
      */
-    private static PageCondition generatePageCondition(Map params){
-        PageCondition pageVo = new PageCondition();
+    private static PageConditionForm generatePageCondition(Map params){
+        PageConditionForm pageVo = new PageConditionForm();
         //设置分页参数
         Object pageNumObj = params.get("pageNum");
         Object pageSizeObj = params.get("pageSize");
@@ -109,12 +142,12 @@ public class PageUtils implements Serializable {
      * 开启分页
      */
     public static void startMyPage(Map params){
-        PageCondition pageCondition = generatePageCondition(params);
-        if(pageCondition.isOrderFlag()){
-            PageHelper.startPage(pageCondition.getPageNum(),
-                    pageCondition.getPageSize(),pageCondition.getOrderByStatement());
+        PageConditionForm pageConditionForm = generatePageCondition(params);
+        if(pageConditionForm.isOrderFlag()){
+            PageHelper.startPage(pageConditionForm.getPageNum(),
+                    pageConditionForm.getPageSize(), pageConditionForm.getOrderByStatement());
         }else{
-            PageHelper.startPage(pageCondition.getPageNum(), pageCondition.getPageSize());
+            PageHelper.startPage(pageConditionForm.getPageNum(), pageConditionForm.getPageSize());
         }
     }
 }
