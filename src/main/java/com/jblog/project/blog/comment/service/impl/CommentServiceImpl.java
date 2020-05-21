@@ -81,7 +81,7 @@ public class CommentServiceImpl implements CommentService {
     public JSONObject publishArticleComment(ArticleEntity articleEntity, SysUser userEntity, JSONObject json) {
         // 1、更新文章评论数+1
         articleEntity.setCommentNum(articleEntity.getCommentNum() + 1);
-        articleMapper.updateById(articleEntity);
+        articleMapper.updateArticle(articleEntity);
 
         // 2、插入一条文章评论
         CommentEntity comment = new CommentEntity();

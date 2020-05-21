@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.DateUtils;
+import com.jblog.common.utils.bean.BeanUtils;
 import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.ArticleTagEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.mapper.ArticleMapper;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.category.domain.CategoryEntity;
@@ -110,6 +112,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
             object.put("createTime", DateUtils.dateTime(article.getCreateTime()));
             object.put("viewNum", article.getViewNum());
             object.put("commentNum", article.getCommentNum());
+            object.put("status",article.getStatus());
 
             array.add(object);
         }
@@ -160,7 +163,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         object.put("tags", tagEntities);
 
         // 5、文章阅读数 + 1
-        articleMapper.updateById(article);
+        articleMapper.updateArticle(article);
 
         return object;
     }
@@ -192,6 +195,8 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         JSONObject body = json.getJSONObject("body");
         article.setContent(body.getString("content"));
         article.setContentHtml(body.getString("contentHtml"));
+        //默认待审核状态
+        article.setStatus("0");
 
         // 2、设置分类信息
         JSONObject category = json.getJSONObject("category");
@@ -293,7 +298,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         article.setUpdateTime(new Date());
         article.setUserId(sysUser.getUserId());
         article.setNickName(sysUser.getNickName());
-        articleMapper.updateById(article);
+        articleMapper.updateArticle(article);
 
         // 3、删除之前的文章标签信息
 //        EntityWrapper<ArticleTagEntity> entityWrapper = new EntityWrapper<>();
@@ -349,5 +354,19 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
     @Override
     public List selectList() {
         return articleMapper.selectList();
+    }
+
+
+    /**
+     * 更新文章
+     * @param articleForm
+     * @return
+     */
+    @Override
+    public int updateArticle(ArticleForm articleForm) {
+        articleForm.setUpdateTime(DateUtils.getNowDate());
+        ArticleEntity articleEntity = new ArticleEntity();
+        BeanUtils.copyBeanProp(articleForm,articleEntity);
+        return articleMapper.updateArticle(articleEntity);
     }
 }

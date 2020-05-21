@@ -78,6 +78,11 @@ public class ArticleEntity implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
+    /**
+     * 文章状态
+     */
+    private String status;
+
     public String[] getTagArray() {
         return tags!= null ? tags.split(",") : null;
     }

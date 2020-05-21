@@ -30,7 +30,7 @@ public interface ArticleMapper {
 
     List selectList();
 
-    Long updateById(ArticleEntity article);
+    int updateArticle(ArticleEntity article);
 
     Long insert(ArticleEntity article);
 

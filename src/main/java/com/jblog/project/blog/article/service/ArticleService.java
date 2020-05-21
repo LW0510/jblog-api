@@ -2,6 +2,7 @@ package com.jblog.project.blog.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jblog.project.blog.article.domain.ArticleEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import com.jblog.project.system.domain.SysUser;
 
@@ -82,5 +83,14 @@ public interface ArticleService{
      * @return
      */
     ArticleEntity selectById(Long id);
+
+
+    /**
+     * 修改文章
+     * @param articleForm
+     * @return
+     */
+    int updateArticle(ArticleForm articleForm);
+
 }
 

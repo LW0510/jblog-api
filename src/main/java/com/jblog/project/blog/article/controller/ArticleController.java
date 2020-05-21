@@ -7,14 +7,16 @@ import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.ServletUtils;
 import com.jblog.framework.security.LoginUser;
 import com.jblog.framework.security.service.TokenService;
+import com.jblog.framework.web.controller.BaseController;
 import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.blog.article.domain.ArticleEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
+import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.category.service.CategoryService;
-import com.jblog.project.blog.service.ArticleService;
-import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,12 +30,12 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends BaseController {
     public static final int HOT_OR_NEW_ARTICLE_NUM = 6;
     public static final int ARTICLE_ARCHIVE_LIMIT_NUM = 8;
 
     @Autowired
-    private ArticleService articleService;
+    private com.jblog.project.blog.service.ArticleService articleService;
     @Autowired
     private ArticleTagService articleTagService;
     @Autowired
@@ -155,6 +157,16 @@ public class ArticleController {
         JSONObject object = new JSONObject();
         object.put("articleId", id);
         return AjaxResult.success(object);
+    }
+
+    /**
+     * 修改文章
+     */
+    @PreAuthorize("@ss.hasPermi('system:article:edit')")
+    @PostMapping("updateArticle")
+    public AjaxResult edit(@RequestBody ArticleForm articleForm)
+    {
+        return toAjax(articleService.updateArticle(articleForm));
     }
 
 
