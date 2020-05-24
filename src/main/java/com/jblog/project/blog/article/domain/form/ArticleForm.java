@@ -1,5 +1,6 @@
 package com.jblog.project.blog.article.domain.form;
 
+import com.jblog.project.blog.utils.PageUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ArticleForm {
+public class ArticleForm extends PageUtils.PageConditionForm{
 
     private Long id;
 

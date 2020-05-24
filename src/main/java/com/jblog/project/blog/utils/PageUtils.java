@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,17 +20,75 @@ import java.util.Map;
  * @date 2016年11月4日 下午12:59:00
  */
 public class PageUtils implements Serializable {
-    private static final long serialVersionUID = 1L;
-    //总记录数
-    private int totalCount;
-    //每页记录数
-    private int pageSize;
-    //总页数
-    private int totalPage;
-    //当前页数
-    private int currPage;
-    //列表数据
-    private List<?> list;
+
+
+
+    /**
+     * 分页结果集
+     */
+    @Getter
+    @Setter
+    public static class TableDataInfo extends HashMap<String, Object> {
+        private static final long serialVersionUID = 1L;
+        /** 消息状态码 */
+        private static final int code = 200;
+        /** 消息内容 */
+        private static final String msg = "操作成功";
+        /** 当前页数 */
+        private int pageNum;
+        /** 每页记录数 */
+        private int pageSize;
+        /** 总记录数 */
+        private int totalCount;
+        /** 总页数 */
+        private int totalPage;
+        /** 列表数据 */
+        private List<?> rows;
+
+
+
+        /**
+         * 分页
+         *
+         * @param rows       列表数据
+         * @param totalCount 总记录数
+         */
+        public TableDataInfo(List<?> rows, int totalCount) {
+            super.put("code",code);
+            super.put("msg",msg);
+            if(rows == null || rows.size() == 0){
+                super.put("rows", Collections.emptyList());
+            }else{
+                super.put("rows", rows);
+            }
+            super.put("totalCount",totalCount);
+        }
+
+        /**
+         * 分页
+         *
+         * @param rows       列表数据
+         * @param totalCount 总记录数
+         * @param pageSize   每页记录数
+         * @param pageNum   当前页数
+         */
+        public TableDataInfo(List<?> rows, int totalCount, int pageSize, int pageNum) {
+            super.put("code",code);
+            super.put("msg",msg);
+            if(rows == null || rows.size() == 0){
+                super.put("rows", Collections.emptyList());
+            }else{
+                super.put("rows", rows);
+            }
+            super.put("totalCount",totalCount);
+            super.put("pageSize",pageSize);
+            super.put("pageNum",pageNum);
+            super.put("totalCount",totalCount);
+            super.put("totalPage",(int) Math.ceil((double) totalCount / pageSize));
+        }
+    }
+
+
 
 
     /**
@@ -52,42 +112,6 @@ public class PageUtils implements Serializable {
         private String orderByStatement;
     }
 
-
-
-
-
-
-
-
-
-
-
-    /**
-     * 分页
-     *
-     * @param list       列表数据
-     * @param totalCount 总记录数
-     * @param pageSize   每页记录数
-     * @param currPage   当前页数
-     */
-    public PageUtils(List<?> list, int totalCount, int pageSize, int currPage) {
-        this.list = list;
-        this.totalCount = totalCount;
-        this.pageSize = pageSize;
-        this.currPage = currPage;
-        this.totalPage = (int) Math.ceil((double) totalCount / pageSize);
-    }
-
-    /**
-     * 分页
-     */
-//    public PageUtils(Page<?> page) {
-//        this.list = page.getRecords();
-//        this.totalCount = page.getTotal();
-//        this.pageSize = page.getSize();
-//        this.currPage = page.getCurrent();
-//        this.totalPage = page.getPages();
-//    }
 
 
     /**
