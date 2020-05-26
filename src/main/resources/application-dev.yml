@@ -6,7 +6,7 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://localhost:3306/framework?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://localhost:33060/framework?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: root
                 password: 163100217
             # 从库数据源
@@ -55,3 +55,14 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+
+  # redis 配置
+    redis:
+      # 地址
+      host: localhost
+      port: 6379
+
+
+ghc:
+  # 文件路径 示例（ Windows配置D:/jblog/uploadPath，Linux配置 /home/jblog/uploadPath）
+  profile: D:/jblog/uploadPath
