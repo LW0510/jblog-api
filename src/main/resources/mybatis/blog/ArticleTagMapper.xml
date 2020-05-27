@@ -31,7 +31,7 @@
           limit 0,#{limit}
     </select>
 
-    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.utils.PageUtil$PageConditionForm" resultType="com.jblog.project.blog.article.domain.ArticleEntity">
+    <select id="queryArticlesByTag" parameterType="com.jblog.project.blog.utils.PageUtil$PageCondition" resultType="com.jblog.project.blog.article.domain.ArticleEntity">
         select va.* from blog_article_tag vat JOIN blog_article va on va.id = vat.article_id
         where vat.tag_id = #{tagId}
     </select>

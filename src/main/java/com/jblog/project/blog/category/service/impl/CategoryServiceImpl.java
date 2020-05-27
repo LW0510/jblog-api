@@ -27,12 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryEntity> queryPage(Map<String, Object> params) {
-//        Page<CategoryEntity> page = this.selectPage(
-//                new Query<CategoryEntity>(params).getPage(),
-//                new EntityWrapper<>()
-//        );
 
-//        return new PageUtil(page);
         String url = AddressUtils.getCurrApiAddress();
         List<CategoryEntity> categoryEntities = categoryMapper.queryCategoryList(params);
         for(CategoryEntity categoryEntity: categoryEntities){

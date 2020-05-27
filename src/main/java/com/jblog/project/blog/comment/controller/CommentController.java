@@ -58,10 +58,6 @@ public class CommentController {
             vo.setAvatar(url+"avatar/"+vo.getAvatar());
             JSONObject object = formatCommentInfo(vo);
 
-//            EntityWrapper<CommentEntity> entityWrapper = new EntityWrapper<>();
-//            entityWrapper.eq("article_id", vo.getArticleId());
-//            entityWrapper.eq("parent_id", vo.getId());
-//            int childCount = commentService.selectCount(entityWrapper);
             int childCount = commentService.selectCount(vo.getArticleId(),vo.getId());
             if (childCount <= 0) {
                 object.put("childrens", new JSONArray());

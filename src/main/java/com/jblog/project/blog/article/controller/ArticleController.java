@@ -1,7 +1,6 @@
 package com.jblog.project.blog.article.controller;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.ServletUtils;
@@ -63,8 +62,8 @@ public class ArticleController extends BaseController {
      */
     @GetMapping("/hot")
     public AjaxResult listHotArticles() {
-        JSONArray array = articleService.getHotOrNewArticles("view_num");
-        return AjaxResult.success(array);
+        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("view_num");
+        return AjaxResult.success(tableDataInfo.getRows());
     }
 
     /**
@@ -72,8 +71,8 @@ public class ArticleController extends BaseController {
      */
     @GetMapping("/new")
     public AjaxResult listNewArticles() {
-        JSONArray array = articleService.getHotOrNewArticles("create_time");
-        return AjaxResult.success(array);
+        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("create_time");
+        return AjaxResult.success(tableDataInfo.getRows());
     }
 
 
