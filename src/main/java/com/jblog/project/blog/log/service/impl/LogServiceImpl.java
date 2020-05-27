@@ -6,7 +6,7 @@
 //import com.seu.blog.com.jblog.mapper.LogDao;
 //import com.seu.blog.entity.LogEntity;
 //import com.seu.blog.service.LogService;
-//import com.seu.common.utils.PageUtils;
+//import com.seu.common.utils.PageUtil;
 //import com.seu.common.utils.Query;
 //import org.springframework.stereotype.Service;
 //
@@ -23,13 +23,13 @@
 //public class LogServiceImpl extends ServiceImpl<LogDao, LogEntity> implements LogService {
 //
 //    @Override
-//    public PageUtils queryPage(Map<String, Object> params) {
+//    public PageUtil queryPage(Map<String, Object> params) {
 //        Page<LogEntity> page = this.selectPage(
 //                new Query<LogEntity>(params).getPage(),
 //                new EntityWrapper<LogEntity>()
 //        );
 //
-//        return new PageUtils(page);
+//        return new PageUtil(page);
 //    }
 //
 //}

@@ -3,28 +3,25 @@ package com.jblog.project.blog.article.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jblog.common.constant.HttpStatus;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.ServletUtils;
 import com.jblog.framework.security.LoginUser;
 import com.jblog.framework.security.service.TokenService;
 import com.jblog.framework.web.controller.BaseController;
 import com.jblog.framework.web.domain.AjaxResult;
-import com.jblog.framework.web.page.TableDataInfo;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.category.service.CategoryService;
+import com.jblog.project.blog.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章表
@@ -49,33 +46,14 @@ public class ArticleController extends BaseController {
      * 列表 分页查询
      */
     @GetMapping("/list")
-    public TableDataInfo list(@RequestParam(value = "pageNum",required = false) Integer pageNum,
-                              @RequestParam(value = "pageSize",required = false) Integer pageSize,
-                              @RequestParam(value = "orderField",required = false) String orderField,
-                              @RequestParam(value = "order",required = false) String order,
-                              @RequestParam(value = "tagId",required = false) Integer tagId,
-                              @RequestParam(value = "categoryId",required = false) Integer categoryId) {
+    public PageUtil.TableDataInfo list(ArticleForm articleForm) {
 
-        Map<String,Object> params = new HashMap<>(16);
-        params.put("pageNum",pageNum);
-        params.put("pageSize",pageSize);
-        params.put("orderField",orderField);
-        params.put("order",order);
-        params.put("categoryId",categoryId);
-        if (tagId != null) {
-            params.put("tagId",tagId);
-            List<ArticleEntity> articleEntities = articleTagService.queryArticlesByTag(params);
-            JSONArray array = articleService.getFormatArticleList(articleEntities);
-            TableDataInfo tableDataInfo = new TableDataInfo(array, array.size());
-            tableDataInfo.setCode(HttpStatus.SUCCESS);
+        if (articleForm.getTagId() != null) {
+            PageUtil.TableDataInfo tableDataInfo = articleTagService.queryArticlesByTag(articleForm);
             return tableDataInfo;
         }
 
-        List<ArticleEntity> list = articleService.queryPage(params);
-        JSONArray array = articleService.getFormatArticleList(list);
-
-        TableDataInfo tableDataInfo = new TableDataInfo(array, array.size());
-        tableDataInfo.setCode(HttpStatus.SUCCESS);
+        PageUtil.TableDataInfo tableDataInfo = articleService.queryPage(articleForm);
         return tableDataInfo;
     }
 

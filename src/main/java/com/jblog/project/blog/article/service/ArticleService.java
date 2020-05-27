@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
+import com.jblog.project.blog.utils.PageUtil;
 import com.jblog.project.system.domain.SysUser;
 
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章表
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public interface ArticleService{
 
-    List<ArticleEntity> queryPage(Map<String, Object> params);
+    PageUtil.TableDataInfo queryPage(ArticleForm articleForm);
 
     /**
      * 发布文章按年-月汇总
@@ -74,7 +74,7 @@ public interface ArticleService{
      * @param type
      * @return
      */
-    JSONArray getHotOrNewArticles(String type);
+    PageUtil.TableDataInfo getHotOrNewArticles(String type);
 
 
     /**

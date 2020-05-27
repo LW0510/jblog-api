@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
 //                new EntityWrapper<CommentEntity>()
 //        );
 //
-//        return new PageUtils(page);
+//        return new PageUtil(page);
         return commentMapper.queryCommentList(params);
     }
 

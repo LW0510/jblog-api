@@ -23,7 +23,7 @@
 //     */
 //    @RequestMapping("/list")
 //    public AjaxResult list(@RequestParam Map<String, Object> params) {
-//        PageUtils page = logService.queryPage(params);
+//        PageUtil page = logService.queryPage(params);
 //
 //        return AjaxResult.success().put("page", page);
 //    }

@@ -19,7 +19,7 @@ import java.util.Map;
  * @email shadow@163.com
  * @date 2016年11月4日 下午12:59:00
  */
-public class PageUtils implements Serializable {
+public class PageUtil implements Serializable {
 
 
 
@@ -53,7 +53,7 @@ public class PageUtils implements Serializable {
          * @param rows       列表数据
          * @param totalCount 总记录数
          */
-        public TableDataInfo(List<?> rows, int totalCount) {
+        public TableDataInfo(List<?> rows, long totalCount) {
             super.put("code",code);
             super.put("msg",msg);
             if(rows == null || rows.size() == 0){
@@ -92,11 +92,11 @@ public class PageUtils implements Serializable {
 
 
     /**
-     * PageConditionForm 可被接收排序参数的类继承
+     * PageCondition 可被接收排序参数的类继承
      */
     @Getter
     @Setter
-    public static class PageConditionForm{
+    public static class PageCondition{
         /** 当前页*/
         private Integer pageNum;
         /** 页大小*/
@@ -125,34 +125,28 @@ public class PageUtils implements Serializable {
      * @param String order
      * @return
      */
-    private static PageConditionForm generatePageCondition(Map params){
-        PageConditionForm pageVo = new PageConditionForm();
+    private static PageCondition generatePageCondition(PageCondition pageCondition){
+        PageCondition pageVo = new PageCondition();
         //设置分页参数
-        Object pageNumObj = params.get("pageNum");
-        Object pageSizeObj = params.get("pageSize");
-        if(pageNumObj == null || ((Integer)pageNumObj) == 0){
+        if(pageCondition.getPageNum() == null || pageCondition.getPageNum() == 0){
             pageVo.setPageNum(1);
         }else{
-            pageVo.setPageNum((Integer)pageNumObj);
+            pageVo.setPageNum(pageCondition.getPageNum());
         }
-        if(pageSizeObj == null || ((Integer)pageSizeObj) == 0){
+        if(pageCondition.getPageSize() == null || pageCondition.getPageSize() == 0){
             pageVo.setPageSize(10);
         }else{
-            pageVo.setPageSize((Integer)pageSizeObj);
+            pageVo.setPageSize(pageCondition.getPageSize());
         }
 
-
-        Object orderObj = params.get("order");
-        Object orderFieldObj = params.get("orderField");
-
-        if(orderObj == null || StringUtils.isEmpty((String)orderObj)){
+        if(pageCondition.getOrder() == null || StringUtils.isEmpty(pageCondition.getOrder())){
             pageVo.setOrder("desc");
         }else{
-            pageVo.setOrder((String)orderObj);
+            pageVo.setOrder(pageCondition.getOrder());
         }
 
-        if(orderFieldObj != null &&  StringUtils.isNotEmpty((String)orderFieldObj)){
-            pageVo.setOrderField((String)orderFieldObj);
+        if(pageCondition.getOrderField() != null &&  StringUtils.isNotEmpty(pageCondition.getOrderField())){
+            pageVo.setOrderField(pageCondition.getOrderField());
             pageVo.setOrderByStatement(pageVo.getOrderField() + " " + pageVo.getOrder());
 
             //设置字段排序标志
@@ -165,8 +159,8 @@ public class PageUtils implements Serializable {
     /**
      * 开启分页
      */
-    public static void startMyPage(Map params){
-        PageConditionForm pageConditionForm = generatePageCondition(params);
+    public static void startMyPage(PageCondition pageCondition){
+        PageCondition pageConditionForm = generatePageCondition(pageCondition);
         if(pageConditionForm.isOrderFlag()){
             PageHelper.startPage(pageConditionForm.getPageNum(),
                     pageConditionForm.getPageSize(), pageConditionForm.getOrderByStatement());

@@ -1,8 +1,9 @@
 package com.jblog.project.blog.article.service;
 
-import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.ArticleTagEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.tag.domain.TagEntity;
+import com.jblog.project.blog.utils.PageUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,11 @@ import java.util.Map;
  */
 public interface ArticleTagService {
 
+    /**
+     * 获取文章列表
+     * @param params
+     * @return
+     */
     List<ArticleTagEntity> queryPage(Map<String, Object> params);
 
     /**
@@ -28,7 +34,7 @@ public interface ArticleTagService {
      * @param params
      * @return
      */
-    List<ArticleEntity> queryArticlesByTag(Map<String, Object> params);
+    PageUtil.TableDataInfo queryArticlesByTag(ArticleForm params);
 
     /**
      * 获取文章所有标签

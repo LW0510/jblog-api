@@ -9,23 +9,24 @@ import com.jblog.common.utils.ip.AddressUtils;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.ArticleTagEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
+import com.jblog.project.blog.article.domain.vo.HotArticleVo;
 import com.jblog.project.blog.article.mapper.ArticleMapper;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.category.domain.CategoryEntity;
 import com.jblog.project.blog.category.service.CategoryService;
 import com.jblog.project.blog.tag.domain.TagEntity;
 import com.jblog.project.blog.tag.service.TagService;
-import com.jblog.project.blog.utils.PageUtils;
+import com.jblog.project.blog.utils.PageUtil;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import com.jblog.project.system.domain.SysUser;
 import com.jblog.project.system.service.ISysUserService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.jblog.project.blog.article.controller.ArticleController.HOT_OR_NEW_ARTICLE_NUM;
 
@@ -53,7 +54,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
 
 
     @Override
-    public List<ArticleEntity> queryPage(Map<String, Object> params) {
+    public PageUtil.TableDataInfo queryPage(ArticleForm articleForm) {
 //        EntityWrapper<ArticleEntity> entityWrapper = new EntityWrapper<>();
 //        String categoryIdStr = (String) params.get("categoryId");
 //        if (StringUtils.isNotBlank(categoryIdStr)){
@@ -75,9 +76,10 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
 //
 //        return page.getRecords();
 
-        PageUtils.startMyPage(params);
-        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleMapper.queryArticleList(params));
-        return pageInfo.getList();
+        PageUtil.startMyPage(articleForm);
+        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleMapper.queryArticleList(articleForm));
+        PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(pageInfo.getList(),pageInfo.getTotal());
+        return tableDataInfo;
     }
 
     /**
@@ -322,19 +324,18 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
      * @return
      */
     @Override
-    public JSONArray getHotOrNewArticles(String type) {
+    public PageUtil.TableDataInfo getHotOrNewArticles(String type) {
 
-        String orderBy = type + " desc";
-        PageHelper.startPage(1, HOT_OR_NEW_ARTICLE_NUM,orderBy);
-        PageInfo<ArticleEntity> articleList = new PageInfo(articleMapper.selectList());
-        JSONArray array = new JSONArray();
-        for (ArticleEntity article : articleList.getList()) {
-            JSONObject object = new JSONObject();
-            object.put("id", article.getId());
-            object.put("title", article.getTitle());
-            array.add(object);
-        }
-        return array;
+        PageUtil.PageCondition pageCondition = new  PageUtil.PageCondition();
+        pageCondition.setOrderField(type);
+        pageCondition.setPageNum(1);
+        pageCondition.setPageSize(HOT_OR_NEW_ARTICLE_NUM);
+
+        PageUtil.startMyPage(pageCondition);
+        PageInfo<ArticleEntity> pageInfo = new PageInfo(articleMapper.selectList());
+        List list = pageInfo.getList().stream().map(HotArticleVo::new).collect(Collectors.toList());
+        PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(list,pageInfo.getTotal());
+        return tableDataInfo;
     }
 
     /**

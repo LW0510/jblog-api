@@ -13,6 +13,6 @@ package com.jblog.project.blog.service;//package com.weiframework.project.blog.s
 // */
 //public interface LogService extends IService<LogEntity> {
 //
-//    PageUtils queryPage(Map<String, Object> params);
+//    PageUtil queryPage(Map<String, Object> params);
 //}
 //

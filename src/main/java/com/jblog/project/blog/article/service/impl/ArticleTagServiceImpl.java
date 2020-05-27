@@ -3,11 +3,12 @@ package com.jblog.project.blog.article.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.jblog.project.blog.article.domain.ArticleTagEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.mapper.ArticleTagMapper;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.tag.domain.TagEntity;
-import com.jblog.project.blog.utils.PageUtils;
+import com.jblog.project.blog.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class ArticleTagServiceImpl implements ArticleTagService {
 //                new EntityWrapper<>()
 //        );
 //
-//        return new PageUtils(page);
+//        return new PageUtil(page);
         return articleTagMapper.queryArticleTagList();
     }
 
@@ -50,18 +51,19 @@ public class ArticleTagServiceImpl implements ArticleTagService {
         return hotTagIds;
     }
 
+
     /**
      * 根据标签查询文章
-     *
-     * @param params
+     * @param articleForm
      * @return
      */
     @Override
-    public List<ArticleEntity> queryArticlesByTag(Map<String, Object> params) {
+    public PageUtil.TableDataInfo queryArticlesByTag(ArticleForm articleForm) {
 
-        PageUtils.startMyPage(params);
-        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleTagMapper.queryArticlesByTag((Integer) params.get("tagId")));
-        return pageInfo.getList();
+        PageUtil.startMyPage(articleForm);
+        PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleTagMapper.queryArticlesByTag(articleForm.getTagId()));
+        PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(pageInfo.getList(),pageInfo.getTotal());
+        return tableDataInfo;
     }
 
     /**

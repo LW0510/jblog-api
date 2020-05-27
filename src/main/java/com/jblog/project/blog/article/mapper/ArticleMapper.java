@@ -1,11 +1,11 @@
 package com.jblog.project.blog.article.mapper;
 
 import com.jblog.project.blog.article.domain.ArticleEntity;
+import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章表
@@ -24,7 +24,7 @@ public interface ArticleMapper {
      */
     List<ArticleArchivesVo> queyArticleArchives(int limit);
 
-    List<ArticleEntity> queryArticleList(Map<String, Object> params);
+    List<ArticleEntity> queryArticleList(ArticleForm articleForm);
 
     ArticleEntity selectById(Long articleId);
 

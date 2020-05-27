@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 //                new EntityWrapper<>()
 //        );
 
-//        return new PageUtils(page);
+//        return new PageUtil(page);
         String url = AddressUtils.getCurrApiAddress();
         List<CategoryEntity> categoryEntities = categoryMapper.queryCategoryList(params);
         for(CategoryEntity categoryEntity: categoryEntities){
