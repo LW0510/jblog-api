@@ -55,27 +55,6 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
 
     @Override
     public PageUtil.TableDataInfo queryPage(ArticleForm articleForm) {
-//        EntityWrapper<ArticleEntity> entityWrapper = new EntityWrapper<>();
-//        String categoryIdStr = (String) params.get("categoryId");
-//        if (StringUtils.isNotBlank(categoryIdStr)){
-//            Integer categoryId = Integer.parseInt(categoryIdStr);
-//            entityWrapper.eq("category_id", categoryId);
-//        }
-//
-//        String year = (String) params.get("year");
-//        String month = (String) params.get("month");
-//        if (StringUtils.isNotBlank(year) && StringUtils.isNotBlank(month)) {
-//            entityWrapper.eq("year(create_time)", year);
-//            entityWrapper.eq("month(create_time)", month);
-//        }
-//
-//        Page<ArticleEntity> page = this.selectPage(
-//                new Query<ArticleEntity>(params).getPage(),
-//                entityWrapper
-//        );
-//
-//        return page.getRecords();
-
         PageUtil.startMyPage(articleForm);
         PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleMapper.queryArticleList(articleForm));
         PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(pageInfo.getList(),pageInfo.getTotal());
@@ -94,32 +73,6 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         return articleMapper.queyArticleArchives(limit);
     }
 
-    /**
-     * 格式化文章列表输出
-     *
-     * @param list
-     * @return
-     */
-    @Override
-    public JSONArray getFormatArticleList(List<ArticleEntity> list) {
-        JSONArray array = new JSONArray();
-        for (ArticleEntity article :list) {
-            JSONObject object = new JSONObject();
-            object.put("id", article.getId());
-            object.put("nickname", article.getNickName());
-            object.put("title", article.getTitle());
-            object.put("summary", article.getSummary());
-            object.put("weight", article.getWeight());
-            object.put("tags", article.getTagArray());
-            object.put("createTime", DateUtils.dateTime(article.getCreateTime()));
-            object.put("viewNum", article.getViewNum());
-            object.put("commentNum", article.getCommentNum());
-            object.put("status",article.getStatus());
-
-            array.add(object);
-        }
-        return array;
-    }
 
     /**
      * 根据id获取文章，添加阅读数

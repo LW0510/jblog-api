@@ -29,8 +29,6 @@ public interface ArticleService{
      */
     List<ArticleArchivesVo> queyArticleArchives(int limit);
 
-    JSONArray getFormatArticleList(List<ArticleEntity> list);
-
     /**
      * 根据id获取文章，添加阅读数
      *
