@@ -110,4 +110,13 @@ import com.jblog.project.system.domain.SysUser;
      * @return 结果
      */
      SysUser checkEmailUnique(String email);
+
+
+    /**
+     * 根据email查询用户
+     * @param mail
+     * @return
+     */
+    SysUser selectUserByEmail(String mail);
+
 }
