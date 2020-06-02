@@ -98,7 +98,7 @@ public class GhcConfig
      */
     public static String getAvatarPath()
     {
-        return getProfile() + File.separator + "avatar" + File.separator;
+        return getProfile() + File.separator + "avatar";
     }
 
     /**

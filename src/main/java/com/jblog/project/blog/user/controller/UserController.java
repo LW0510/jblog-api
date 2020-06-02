@@ -14,7 +14,6 @@ import com.jblog.project.system.domain.SysRole;
 import com.jblog.project.system.domain.SysUser;
 import com.jblog.project.system.service.ISysRoleService;
 import com.jblog.project.system.service.ISysUserService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

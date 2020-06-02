@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -40,11 +41,15 @@ public class UploadServiceImpl implements UploadService {
     public AjaxResult avatarUpload(MultipartFile avatar, Long userId) {
         HttpServletRequest request = ServletUtils.getRequest();
         String basePath = GhcConfig.getAvatarPath();
+        String oldFileName = avatar.getOriginalFilename();
         String fileName = IdUtils.simpleUUID();
 
-        String returnFileName = null;
+        String filePath = null;
+        String fullFileName = null;
         try {
-            returnFileName = FileUploadUtils.upload(basePath,fileName,avatar);
+            filePath = FileUploadUtils.upload(basePath,fileName,avatar);
+            fullFileName = fileName + oldFileName.substring(oldFileName.lastIndexOf("."));
+
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new CustomException("头像上传失败");
@@ -52,7 +57,7 @@ public class UploadServiceImpl implements UploadService {
 
         SysUser user = new SysUser();
         user.setUserId(userId);
-        user.setAvatar(returnFileName);
+        user.setAvatar(fullFileName);
         user.setUpdateBy(tokenService.getLoginUser(request).getUsername());
         int num = userMapper.updateUser(user);
 
@@ -66,7 +71,7 @@ public class UploadServiceImpl implements UploadService {
                     .append(request.getServerPort())
                     .append(request.getContextPath())
                     .append("/")
-                    .append(returnFileName);
+                    .append(fullFileName);
             AjaxResult res = AjaxResult.success();
             res.put("url",url);
             return res;

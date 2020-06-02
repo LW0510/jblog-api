@@ -20,7 +20,7 @@ public class AnonymousAccessService {
             "/article/list","/tags/hot","/category/list","/tags/list",
             "/article/hot","/article/new","/article/archives","/article/view",
             "/tags/detail","/category/detail","/category/detail/info","/comments/article/info","/system/user/register",
-            "/sendMailCode","/system/user/retrievePassword"
+            "/sendMailCode","/system/user/retrievePassword","/avatar/upload"
     };
 
     /**
