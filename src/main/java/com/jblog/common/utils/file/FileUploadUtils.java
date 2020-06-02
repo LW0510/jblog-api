@@ -143,7 +143,7 @@ public class FileUploadUtils
         File desc = getAbsoluteFile(baseDir, fileName);
         file.transferTo(desc);
         String pathFileName = getPathFileName(baseDir, fileName);
-        return pathFileName;
+        return fileName;
     }
 
     /**
@@ -153,7 +153,8 @@ public class FileUploadUtils
     {
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
+//        fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
+        fileName = encodingFilename(fileName) + "." + extension;
         return fileName;
     }
 
@@ -164,7 +165,8 @@ public class FileUploadUtils
     public static final String extractFilename(MultipartFile file,String myFileName)
     {
         String extension = getExtension(file);
-        myFileName = DateUtils.datePath() + "/" + encodingFilename(myFileName+extension) + "." + extension;
+//        myFileName = DateUtils.datePath() + "/" + encodingFilename(myFileName+extension) + "." + extension;
+        myFileName = encodingFilename(myFileName) + "." + extension;
         return myFileName;
     }
 

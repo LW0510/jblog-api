@@ -9,6 +9,7 @@ import com.jblog.project.blog.tag.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class TagServiceImpl implements TagService {
         String url = AddressUtils.getCurrApiAddress();
         List<TagVo> tagVoList = tagMapper.queryTagDetails();
         for(TagVo tagVo : tagVoList){
-            tagVo.setAvatar(url+"avatar/"+tagVo.getAvatar());
+            tagVo.setAvatar(url+"profile/avatar/"+tagVo.getAvatar());
         }
         return tagVoList;
     }
@@ -75,7 +76,7 @@ public class TagServiceImpl implements TagService {
     public TagVo queryOneTagDetail(Integer tagId) {
         String url = AddressUtils.getCurrApiAddress();
         TagVo tag = tagMapper.queryOneTagDetail(tagId);
-        tag.setAvatar(url+"avatar/"+tag.getAvatar());
+        tag.setAvatar(url+"profile/avatar/"+tag.getAvatar());
         return tag;
     }
 

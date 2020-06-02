@@ -1,5 +1,6 @@
 package com.jblog.project.system.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -80,7 +81,7 @@ public class SysLoginController
         // 权限集合
         Set<String> permissions = permissionService.getMenuPermission(user);
         AjaxResult ajax = AjaxResult.success();
-        user.setAvatar(AddressUtils.getCurrApiAddress()+"avatar/"+user.getAvatar());
+        user.setAvatar(AddressUtils.getCurrApiAddress() + "profile/avatar/"+user.getAvatar());
         ajax.put("user", user);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);

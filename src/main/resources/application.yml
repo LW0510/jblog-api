@@ -71,6 +71,40 @@ spring:
         max-wait: -1ms
 
 
+##网易系(126/163/yeah)邮箱配置
+#  mail:
+#    host: smtp.163.com #发送邮件服务器
+#    username: shadow13007427338@163.com #发送邮件的邮箱地址
+#    password: HGBMDZIGIDSAVAGM #客户端授权码，不是邮箱密码,网易的是自己设置的
+#    from: shadow13007427338@163.com # 发送邮件的地址，和上面username一致
+#    default-encoding: utf-8
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#          required: true
+
+  mail:
+    host: smtp.163.com
+    username: 13007427338@163.com
+    password: HGBMDZIGIDSAVAGM
+    default-encoding: UTF-8
+    port: 25
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+
 # token配置
 token:
     # 令牌自定义标识

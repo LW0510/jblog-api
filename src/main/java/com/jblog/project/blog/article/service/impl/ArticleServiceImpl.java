@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -104,7 +105,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         SysUser sysUser = userService.selectUserById(article.getUserId());
         JSONObject user = new JSONObject();
         user.put("id", sysUser.getUserId());
-        user.put("avatar", AddressUtils.getCurrApiAddress()+"avatar/"+sysUser.getAvatar());
+        user.put("avatar", AddressUtils.getCurrApiAddress()+"profile/avatar/"+sysUser.getAvatar());
         user.put("nickname", sysUser.getNickName());
         object.put("author", user);
 

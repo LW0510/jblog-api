@@ -44,12 +44,10 @@ public class UploadServiceImpl implements UploadService {
         String oldFileName = avatar.getOriginalFilename();
         String fileName = IdUtils.simpleUUID();
 
-        String filePath = null;
+//        String fullFileName = fileName + oldFileName.substring(oldFileName.lastIndexOf("."));
         String fullFileName = null;
         try {
-            filePath = FileUploadUtils.upload(basePath,fileName,avatar);
-            fullFileName = fileName + oldFileName.substring(oldFileName.lastIndexOf("."));
-
+            fullFileName = FileUploadUtils.upload(basePath,fileName,avatar);
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new CustomException("头像上传失败");
@@ -70,7 +68,7 @@ public class UploadServiceImpl implements UploadService {
                     .append(":")
                     .append(request.getServerPort())
                     .append(request.getContextPath())
-                    .append("/")
+                    .append("/profile/avatar/")
                     .append(fullFileName);
             AjaxResult res = AjaxResult.success();
             res.put("url",url);

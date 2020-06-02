@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class CategoryController {
     public AjaxResult detailById(@RequestParam("id") Integer categoryId) {
         String url = AddressUtils.getCurrApiAddress();
         CategoryVo categoryVo = categoryService.queryOneCategoryDetail(categoryId);
-        categoryVo.setAvatar(url+"avatar/"+categoryVo.getAvatar());
+        categoryVo.setAvatar(url+"profile/avatar/"+categoryVo.getAvatar());
         return AjaxResult.success(categoryVo);
     }
 

@@ -9,6 +9,7 @@ import com.jblog.project.blog.category.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public class CategoryServiceImpl implements CategoryService {
         String url = AddressUtils.getCurrApiAddress();
         List<CategoryEntity> categoryEntities = categoryMapper.queryCategoryList(params);
         for(CategoryEntity categoryEntity: categoryEntities){
-            categoryEntity.setAvatar(url+"avatar/"+categoryEntity.getAvatar());
+            categoryEntity.setAvatar(
+                    url+"profile/avatar/"+categoryEntity.getAvatar());
         }
         return categoryEntities;
     }
@@ -46,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
         String url = AddressUtils.getCurrApiAddress();
         List<CategoryVo> categoryVoList = categoryMapper.queryCategoryDetails();
         for(CategoryVo categoryVo: categoryVoList){
-            categoryVo.setAvatar(url+"avatar/"+categoryVo.getAvatar());
+            categoryVo.setAvatar(url+"profile/avatar/"+categoryVo.getAvatar());
         }
         return categoryVoList;
     }
