@@ -19,8 +19,8 @@ public class AnonymousAccessService {
             //业务相关
             "/article/list","/tags/hot","/category/list","/tags/list",
             "/article/hot","/article/new","/article/archives","/article/view",
-            "/tags/detail","/category/detail","/category/detail/info","/comments/article/info","/system/user/register",
-            "/sendMailCode","/system/user/retrievePassword","/avatar/upload"
+            "/tags/detail","/category/detail","/category/detail/info","/comments/article/info","/user/register",
+            "/sendMailCode","/user/retrievePassword","/avatar/upload"
     };
 
     /**

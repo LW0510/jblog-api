@@ -58,19 +58,19 @@ import com.jblog.project.system.domain.SysUser;
      */
      String checkUserNameUnique(String userName);
 
+
     /**
      * 校验手机号码是否唯一
-     *
-     * @param user 用户信息
-     * @return 结果
+     * @param user
+     * @return
      */
      String checkPhoneUnique(SysUser user);
 
+
     /**
      * 校验email是否唯一
-     *
-     * @param user 用户信息
-     * @return 结果
+     * @param user
+     * @return
      */
      String checkEmailUnique(SysUser user);
 

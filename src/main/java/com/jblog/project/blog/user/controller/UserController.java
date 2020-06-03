@@ -3,6 +3,7 @@ package com.jblog.project.blog.user.controller;
 import com.jblog.common.constant.UserConstants;
 import com.jblog.common.utils.SecurityUtils;
 import com.jblog.common.utils.ServletUtils;
+import com.jblog.common.utils.StringUtils;
 import com.jblog.framework.aspectj.lang.annotation.Log;
 import com.jblog.framework.aspectj.lang.enums.BusinessType;
 import com.jblog.framework.security.LoginUser;
@@ -15,13 +16,15 @@ import com.jblog.project.system.domain.SysUser;
 import com.jblog.project.system.service.ISysRoleService;
 import com.jblog.project.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-@RequestMapping("/system/user")
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Autowired
@@ -63,6 +66,42 @@ public class UserController extends BaseController {
         user.setRoleIds(new Long[]{common.getRoleId()});
         return toAjax(iSysUserService.insertUser(user));
     }
+
+    /**
+     * 修改用户
+     */
+//    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @PostMapping("updateUser")
+    public AjaxResult edit(@Validated @RequestBody SysUser user)
+    {
+        iSysUserService.checkUserAllowed(user);
+        if (UserConstants.NOT_UNIQUE.equals(iSysUserService.checkPhoneUnique(user)))
+        {
+            return AjaxResult.error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
+        }
+        else if (UserConstants.NOT_UNIQUE.equals(iSysUserService.checkEmailUnique(user)))
+        {
+            return AjaxResult.error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
+        }
+        user.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(iSysUserService.updateUser(user));
+    }
+
+
+    /**
+     * 根据用户编号获取详细信息
+     */
+//    @PreAuthorize("@ss.hasPermi('system:user:query')")
+    @GetMapping("/info")
+    public AjaxResult getInfo(@RequestParam("userId") Long userId)
+    {
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put(AjaxResult.DATA_TAG, iSysUserService.selectUserById(userId));
+        ajax.put("roleIds", roleService.selectRoleListByUserId(userId));
+        return ajax;
+    }
+
 
 
     /**

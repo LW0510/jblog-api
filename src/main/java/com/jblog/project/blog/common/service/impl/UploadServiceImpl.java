@@ -41,7 +41,7 @@ public class UploadServiceImpl implements UploadService {
     public AjaxResult avatarUpload(MultipartFile avatar, Long userId) {
         HttpServletRequest request = ServletUtils.getRequest();
         String basePath = GhcConfig.getAvatarPath();
-        String oldFileName = avatar.getOriginalFilename();
+//        String oldFileName = avatar.getOriginalFilename();
         String fileName = IdUtils.simpleUUID();
 
 //        String fullFileName = fileName + oldFileName.substring(oldFileName.lastIndexOf("."));
