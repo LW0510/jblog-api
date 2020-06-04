@@ -22,9 +22,9 @@ import javax.mail.internet.MimeMessage;
 public class MailTest {
 
     private static final Logger logger = LoggerFactory.getLogger(MailTest.class);
-    @Autowired
+//    @Autowired
     private JavaMailSender mailSender;
-    @Value("${spring.mail.username}")
+//    @Value("${spring.mail.username}")
     private String from;
 
     @Test

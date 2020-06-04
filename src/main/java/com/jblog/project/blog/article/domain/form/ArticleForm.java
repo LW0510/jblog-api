@@ -40,7 +40,6 @@ public class ArticleForm extends PageUtil.PageCondition{
 
     private String status;
 
-
     private Integer tagId;
 
 }

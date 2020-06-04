@@ -47,5 +47,13 @@ public interface ArticleTagMapper{
 
 
     List<ArticleTagEntity> queryArticleTagList();
+
+
+    /**
+     * 删除文章与标签的关系
+     * @param articleId
+     */
+    int deleteArticleTag(@Param("articleId") Long articleId);
+
 }
 

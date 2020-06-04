@@ -2,15 +2,12 @@ package com.jblog.project.blog.utils;
 
 
 import com.github.pagehelper.PageHelper;
-import com.jblog.common.utils.StringUtils;
-import lombok.Getter;
-import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 分页工具类
@@ -26,8 +23,6 @@ public class PageUtil implements Serializable {
     /**
      * 分页结果集
      */
-    @Getter
-    @Setter
     public static class TableDataInfo extends HashMap<String, Object> {
         private static final long serialVersionUID = 1L;
         /** 消息状态码 */
@@ -45,7 +40,53 @@ public class PageUtil implements Serializable {
         /** 列表数据 */
         private List<?> rows;
 
+        public static int getCode() {
+            return code;
+        }
 
+        public static String getMsg() {
+            return msg;
+        }
+
+        public int getPageNum() {
+            return pageNum;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
+
+        public int getTotalCount() {
+            return totalCount;
+        }
+
+        public int getTotalPage() {
+            return totalPage;
+        }
+
+        public List<?> getRows() {
+            return rows;
+        }
+
+        public void setPageNum(int pageNum) {
+            this.pageNum = pageNum;
+        }
+
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public void setTotalCount(int totalCount) {
+            this.totalCount = totalCount;
+        }
+
+        public void setTotalPage(int totalPage) {
+            this.totalPage = totalPage;
+        }
+
+        public void setRows(List<?> rows) {
+            this.rows = rows;
+        }
 
         /**
          * 分页
@@ -94,8 +135,6 @@ public class PageUtil implements Serializable {
     /**
      * PageCondition 可被接收排序参数的类继承
      */
-    @Getter
-    @Setter
     public static class PageCondition{
         /** 当前页*/
         private Integer pageNum;
@@ -110,6 +149,54 @@ public class PageUtil implements Serializable {
         private boolean orderFlag;
         /** 构造的 orderBy 语句 */
         private String orderByStatement;
+
+        public Integer getPageNum() {
+            return pageNum;
+        }
+
+        public Integer getPageSize() {
+            return pageSize;
+        }
+
+        public String getOrderField() {
+            return orderField;
+        }
+
+        public String getOrder() {
+            return order;
+        }
+
+        public boolean isOrderFlag() {
+            return orderFlag;
+        }
+
+        public String getOrderByStatement() {
+            return orderByStatement;
+        }
+
+        public void setPageNum(Integer pageNum) {
+            this.pageNum = pageNum;
+        }
+
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public void setOrderField(String orderField) {
+            this.orderField = orderField;
+        }
+
+        public void setOrder(String order) {
+            this.order = order;
+        }
+
+        public void setOrderFlag(boolean orderFlag) {
+            this.orderFlag = orderFlag;
+        }
+
+        public void setOrderByStatement(String orderByStatement) {
+            this.orderByStatement = orderByStatement;
+        }
     }
 
 

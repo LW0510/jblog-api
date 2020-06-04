@@ -51,7 +51,6 @@ public class ArticleController extends BaseController {
             PageUtil.TableDataInfo tableDataInfo = articleTagService.queryArticlesByTag(articleForm);
             return tableDataInfo;
         }
-
         PageUtil.TableDataInfo tableDataInfo = articleService.queryPage(articleForm);
         return tableDataInfo;
     }
@@ -147,11 +146,20 @@ public class ArticleController extends BaseController {
      * 修改文章
      */
     @PreAuthorize("@ss.hasPermi('system:article:edit')")
-    @PostMapping("updateArticle")
+    @PostMapping("/updateArticle")
     public AjaxResult edit(@RequestBody ArticleForm articleForm)
     {
         return toAjax(articleService.updateArticle(articleForm));
     }
 
 
+    /**
+     * 删除文章
+     */
+    @PreAuthorize("@ss.hasPermi('system:article:delete')")
+    @PostMapping("/deleteArticle")
+    public AjaxResult delete(@RequestParam("id") Long id)
+    {
+        return toAjax(articleService.deleteOneArticle(id));
+    }
 }

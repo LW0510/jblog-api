@@ -90,5 +90,8 @@ public interface ArticleService{
      */
     int updateArticle(ArticleForm articleForm);
 
+
+    int deleteOneArticle(Long id);
+
 }
 

@@ -63,6 +63,11 @@ public class ArticleEntity implements Serializable {
      * 文章标签
      */
     private String tags;
+
+    /**
+     * 文章标签2
+     */
+    private String tags2;
     /**
      * 文章分类ID
      */

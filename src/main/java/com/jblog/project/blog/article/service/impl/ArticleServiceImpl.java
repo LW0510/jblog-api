@@ -2,6 +2,7 @@ package com.jblog.project.blog.article.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Joiner;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.DateUtils;
 import com.jblog.common.utils.bean.BeanUtils;
@@ -11,6 +12,7 @@ import com.jblog.project.blog.article.domain.ArticleTagEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.HotArticleVo;
 import com.jblog.project.blog.article.mapper.ArticleMapper;
+import com.jblog.project.blog.article.mapper.ArticleTagMapper;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.category.domain.CategoryEntity;
 import com.jblog.project.blog.category.service.CategoryService;
@@ -40,8 +42,7 @@ import static com.jblog.project.blog.article.controller.ArticleController.HOT_OR
  */
 @Service
 public class ArticleServiceImpl implements com.jblog.project.blog.service.ArticleService {
-//    @Autowired
-//    private UserService userService;
+
     @Autowired
     private ISysUserService userService;
     @Autowired
@@ -52,12 +53,24 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
     private CategoryService categoryService;
     @Autowired
     private ArticleMapper articleMapper;
+    @Autowired
+    private ArticleTagMapper articleTagMapper;
 
 
     @Override
     public PageUtil.TableDataInfo queryPage(ArticleForm articleForm) {
         PageUtil.startMyPage(articleForm);
         PageInfo<ArticleEntity> pageInfo = new PageInfo<>(articleMapper.queryArticleList(articleForm));
+        //初始化文章标签
+        for(ArticleEntity articleEntity : pageInfo.getList()){
+            List<String> tags = new ArrayList<>(16);
+            List<TagEntity> tagEntities = articleTagMapper.queryArticleTags(articleEntity.getId());
+            for(TagEntity tagEntity : tagEntities){
+                tags.add(tagEntity.getTagName());
+            }
+            articleEntity.setTags2(Joiner.on(",").join(tags));
+        }
+
         PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(pageInfo.getList(),pageInfo.getTotal());
         return tableDataInfo;
     }
@@ -257,10 +270,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         articleMapper.updateArticle(article);
 
         // 3、删除之前的文章标签信息
-//        EntityWrapper<ArticleTagEntity> entityWrapper = new EntityWrapper<>();
-//        entityWrapper.eq("article_id", id);
-//        articleTagService.delete(entityWrapper);
-        articleMapper.deleteById(id);
+        articleTagMapper.deleteArticleTag(id);
 
         // 4、更新文章标签信息
         articleTagService.insertBatch(articleTagEntityList);
@@ -323,5 +333,14 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         ArticleEntity articleEntity = new ArticleEntity();
         BeanUtils.copyBeanProp(articleForm,articleEntity);
         return articleMapper.updateArticle(articleEntity);
+    }
+
+    @Override
+    public int deleteOneArticle(Long id) {
+        //删除文章信息
+        articleMapper.deleteById(id);
+        //删除文章与标签的关系
+        articleTagMapper.deleteArticleTag(id);
+        return 1;
     }
 }

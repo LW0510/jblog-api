@@ -26,6 +26,11 @@
 
     </insert>
 
+    <delete id="deleteArticleTag">
+        delete from blog_article_tag
+        where article_id = #{articleId}
+    </delete>
+
     <select id="queryHotTagIds" parameterType="Integer" resultType="Integer">
         select tag_id from blog_article_tag GROUP BY tag_id ORDER BY count(*) desc
           limit 0,#{limit}

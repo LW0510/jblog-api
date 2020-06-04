@@ -28,13 +28,13 @@ public class UserService {
     @Autowired
     private RedisCache redisCache;
 
-    @Autowired
+//    @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
     private SysUserMapper userMapper;
 
-    @Value("${spring.mail.username}")
+//    @Value("${spring.mail.username}")
     private String from;
 
 
@@ -109,9 +109,9 @@ public class UserService {
         if(num  > 0){
             //发送邮箱
             StringBuilder sb = new StringBuilder();
-            sb.append("邮箱为:" + mail + "的用户您好：<br/><br/>");
-            sb.append("您的用户名为:<strong>"+user.getUserName()+"</strong>"+" 密码为:"+newPwd+"<br/><br/>");
-            sb.append("此邮件无需回复！！<br/><br/>");
+            sb.append("邮箱为:<strong>" + mail + "</strong>的用户您好：<br/><br/>");
+            sb.append("您的用户名为:<strong>"+user.getUserName()+"</strong>"+" 密码为:<strong>"+newPwd+"</strong><br/><br/>");
+            sb.append("(此邮件由系统自动发出, 请勿回复。)<br/><br/>");
             sb.append("来自：一点点梵博客平台<br/><br/>");
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper messageHelper;

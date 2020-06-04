@@ -93,6 +93,7 @@
         <where>
             <if test="categoryId != null">category_id = #{categoryId}</if>
             <if test="title != null and title != ''">and title like concat('%',#{title},'%')</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
         </where>
     </select>
 
