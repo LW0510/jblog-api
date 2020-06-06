@@ -1,5 +1,6 @@
 package com.jblog.project.blog.tag.controller;
 
+import com.jblog.framework.web.controller.BaseController;
 import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.blog.article.service.ArticleTagService;
 import com.jblog.project.blog.tag.domain.TagEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
 
 
 /**
@@ -20,7 +22,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/tags")
-public class TagController {
+public class TagController extends BaseController {
     public static final int HOT_ARTICLE_TAG_NUM = 4;
     @Autowired
     private TagService tagService;
@@ -31,8 +33,8 @@ public class TagController {
      * 列表
      */
     @GetMapping("/list")
-    public AjaxResult list() {
-        List<TagEntity> tagEntities = tagService.selectList();
+    public AjaxResult list(TagEntity tagEntity) {
+        List<TagEntity> tagEntities = tagService.selectList(tagEntity);
         return AjaxResult.success(tagEntities);
     }
 
@@ -44,9 +46,6 @@ public class TagController {
         List<Integer> tagIds = articleTagService.queryHotTagIds(HOT_ARTICLE_TAG_NUM);
         log.info("tagIds.size()={} {}", tagIds.size(), tagIds.toString());
         Integer[] tagIdsArray = new Integer[tagIds.size()];
-        /*for (int i = 0; i < tagIds.size(); i++) {
-            tagIdsArray[i] = tagIds.get(i);
-        }*/
         List<TagEntity> tagEntities = tagService.queryHotTagDetails(tagIds.toArray(tagIdsArray));
         return AjaxResult.success(tagEntities);
     }
@@ -58,6 +57,15 @@ public class TagController {
     public AjaxResult detail() {
         List<TagVo> tagVos = tagService.queryTagDetails();
         return AjaxResult.success(tagVos);
+    }
+
+    /**
+     * id查询标签
+     */
+    @GetMapping("/getTagById")
+    public AjaxResult getTagById(@RequestParam("id") Integer id) {
+        TagEntity tagEntity = tagService.getTagById(id);
+        return AjaxResult.success(tagEntity);
     }
 
     /**
@@ -74,7 +82,7 @@ public class TagController {
      * 保存
      */
     @RequestMapping("/save")
-    public AjaxResult save(@RequestBody TagEntity tag) {
+    public AjaxResult save(TagEntity tag) {
         tagService.insert(tag);
 
         return AjaxResult.success();
@@ -84,8 +92,8 @@ public class TagController {
      * 修改
      */
     @RequestMapping("/update")
-    public AjaxResult update(@RequestBody TagEntity tag) {
-        ValidatorUtils.validateEntity(tag);
+    public AjaxResult update(TagEntity tag) {
+//        ValidatorUtils.validateEntity(tag);
 //        全部更新
         tagService.updateById(tag);
 
@@ -96,8 +104,8 @@ public class TagController {
      * 删除
      */
     @RequestMapping("/delete")
-    public AjaxResult delete(@RequestBody Integer[] ids) {
-        tagService.deleteBatchIds(Arrays.asList(ids));
+    public AjaxResult delete(@RequestParam("id") Integer id) {
+        tagService.deleteBatchIds(Arrays.asList(new Integer[]{id}));
 
         return AjaxResult.success();
     }

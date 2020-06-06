@@ -29,8 +29,8 @@ public class CategoryController {
      * 列表
      */
     @GetMapping("/list")
-    public AjaxResult list() {
-        List<CategoryEntity> categoryEntityList = categoryService.queryPage(null);
+    public AjaxResult list(CategoryEntity categoryEntity) {
+        List<CategoryEntity> categoryEntityList = categoryService.queryPage(categoryEntity);
         return AjaxResult.success(categoryEntityList);
     }
 
@@ -40,6 +40,12 @@ public class CategoryController {
     @GetMapping("/detail")
     public AjaxResult detail() {
         List<CategoryVo> categoryVos = categoryService.queryCategoryDetails();
+        return AjaxResult.success(categoryVos);
+    }
+
+    @GetMapping("/getCategory")
+    public AjaxResult getCategory(@RequestParam("id") Integer id) {
+        CategoryEntity categoryVos = categoryService.selectById(id);
         return AjaxResult.success(categoryVos);
     }
 
@@ -59,7 +65,7 @@ public class CategoryController {
      * 保存
      */
     @RequestMapping("/save")
-    public AjaxResult save(@RequestBody CategoryEntity category) {
+    public AjaxResult save(CategoryEntity category) {
         categoryService.insert(category);
 
         return AjaxResult.success();
@@ -69,8 +75,8 @@ public class CategoryController {
      * 修改
      */
     @RequestMapping("/update")
-    public AjaxResult update(@RequestBody CategoryEntity category) {
-        ValidatorUtils.validateEntity(category);
+    public AjaxResult update(CategoryEntity category) {
+//        ValidatorUtils.validateEntity(category);
 //        全部更新
         categoryService.updateById(category);
 
@@ -81,8 +87,8 @@ public class CategoryController {
      * 删除
      */
     @RequestMapping("/delete")
-    public AjaxResult delete(@RequestBody Integer[] ids) {
-        categoryService.deleteBatchIds(Arrays.asList(ids));
+    public AjaxResult delete(@RequestParam("id") Integer id) {
+        categoryService.deleteBatchIds(Arrays.asList(new Integer[]{id}));
 
         return AjaxResult.success();
     }

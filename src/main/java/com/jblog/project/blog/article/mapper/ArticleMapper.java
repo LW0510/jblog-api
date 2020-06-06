@@ -4,6 +4,7 @@ import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface ArticleMapper {
 
     ArticleEntity selectById(Long articleId);
 
-    List selectList();
+    List<ArticleEntity> queryArticleListByUserId(@Param("userId") Long userId);
 
     int updateArticle(ArticleEntity article);
 
@@ -36,5 +37,14 @@ public interface ArticleMapper {
 
     Long deleteById(Long id);
 
+    int auditArticle(@Param("id") Long id, @Param("status") String status);
+
+    Integer getUserCount();
+
+    Integer getCommentCount();
+
+    Integer getArticleCount();
+
+    Integer getTagCount();
 }
 

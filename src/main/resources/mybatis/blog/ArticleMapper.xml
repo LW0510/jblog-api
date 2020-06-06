@@ -78,12 +78,17 @@
         where id = #{id}
     </update>
 
+    <update id="auditArticle">
+        update blog_article set status = #{status} where id = #{id}
+    </update>
+
     <delete id="deleteById">
         delete from blog_article where id = #{0}
     </delete>
 
     <select id="queyArticleArchives" parameterType="Integer" resultType="com.jblog.project.blog.article.domain.vo.ArticleArchivesVo">
         select year(create_time) as year,month(create_time) as month,count(*) as count from blog_article
+        where status = '1'
         group by year(create_time),month(create_time)
         limit 0,#{limit}
     </select>
@@ -91,9 +96,16 @@
     <select id="queryArticleList" resultMap="articleMap">
         select * from blog_article
         <where>
+            <if test="userId != null">user_id = #{userId}</if>
             <if test="categoryId != null">category_id = #{categoryId}</if>
             <if test="title != null and title != ''">and title like concat('%',#{title},'%')</if>
             <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and nick_name like concat('%',#{nickName},'%')</if>
+            <if test="tags != null and tags != ''">and tags like concat('%',#{tags},'%')</if>
+            <if test="year != null">
+                and date_format(create_time,'%Y') &gt;=  #{year}
+                and date_format(create_time,'%m') &gt;=  #{month}
+            </if>
         </where>
     </select>
 
@@ -102,8 +114,30 @@
     </select>
 
 
-    <select id="selectList" resultMap="articleMap">
+    <select id="queryArticleListByUserId" resultMap="articleMap">
         select * from blog_article
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="getUserCount" resultType="java.lang.Integer">
+        select count(*) from sys_user
+    </select>
+
+    <select id="getCommentCount" resultType="java.lang.Integer">
+           select count(*) from blog_comment
+    </select>
+
+    <select id="getArticleCount" resultType="java.lang.Integer">
+           select count(*) from blog_article
+    </select>
+
+    <select id="getTagCount" resultType="java.lang.Integer">
+           select count(*) from blog_tag
     </select>
 
 </mapper>

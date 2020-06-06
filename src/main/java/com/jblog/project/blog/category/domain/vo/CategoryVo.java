@@ -1,6 +1,10 @@
 package com.jblog.project.blog.category.domain.vo;
 
-import com.jblog.project.blog.category.domain.CategoryEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
 
 /**
  * 文章分类
@@ -8,7 +12,9 @@ import com.jblog.project.blog.category.domain.CategoryEntity;
  * @author shadow
  * @since 2018/7/7 14:57.
  */
-public class CategoryVo extends CategoryEntity {
+@Getter
+@Setter
+public class CategoryVo {
 
     /**
      * 序列化
@@ -17,12 +23,16 @@ public class CategoryVo extends CategoryEntity {
 
     private int articles;
 
-    public int getArticles() {
-        return articles;
-    }
+    private Integer id;
 
-    public void setArticles(int articles) {
-        this.articles = articles;
-    }
+    private String categoryName;
+
+    private String avatar;
+
+    private String description;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
+
 
 }

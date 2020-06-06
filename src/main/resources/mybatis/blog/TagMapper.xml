@@ -9,6 +9,7 @@
         <result property="tagName" column="tag_name"/>
         <result property="avatar" column="avatar"/>
         <result property="createTime" column="create_time"/>
+        <result property="description" column="description"/>
     </resultMap>
 
     <select id="queryHotTagDetails" resultType="com.jblog.project.blog.tag.domain.TagEntity">
@@ -36,16 +37,26 @@
 
     <select id="selectList" resultMap="tagMap">
         select * from blog_tag
+        <where>
+            <if test="tagName != null and tagName !=  ''">
+                tag_name like concat('%',#{tagName},'%')
+            </if>
+            <if test="description != null and description !=  ''">
+                and description like concat('%',#{description},'%')
+            </if>
+        </where>
     </select>
 
     <insert id="insert">
         insert into blog_tag(
         <if test="tagName != null and tagName != ''">tag_name,</if>
         <if test="avatar != null and avatar != ''">avatar,</if>
+        <if test="description != null and description != ''">description,</if>
         create_time
         )values (
         <if test="tagName != null and tagName != ''">#{tagName},</if>
         <if test="avatar != null and avatar != ''">#{avatar},</if>
+        <if test="description != null and description != ''">#{description},</if>
         sysdate()
         )
     </insert>
@@ -62,12 +73,17 @@
         <set>
             <if test="tagName != null and tagName != ''">tag_name = #{tagName},</if>
             <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
         </set>
         where id = #{id}
     </update>
 
     <select id="queryTagList" resultMap="tagMap">
         select * from blog_tag
+    </select>
+
+    <select id="getTagById" resultMap="tagMap">
+        select * from blog_tag where id = #{0}
     </select>
 
 </mapper>

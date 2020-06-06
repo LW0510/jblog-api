@@ -9,7 +9,6 @@ import com.jblog.project.blog.tag.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +45,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public  List<TagEntity> queryHotTagDetails(Integer[] tagIds){
         if (tagIds == null || tagIds.length <= 0){
-            return this.selectList();
+            return this.selectList(null);
         } else {
             return tagMapper.queryHotTagDetails(tagIds);
         }
@@ -84,10 +83,11 @@ public class TagServiceImpl implements TagService {
     /**
      * 获取标签列表
      * @return
+     * @param tagEntity
      */
     @Override
-    public List<TagEntity> selectList() {
-        return tagMapper.selectList();
+    public List<TagEntity> selectList(TagEntity tagEntity) {
+        return tagMapper.selectList(tagEntity);
     }
 
 
@@ -104,5 +104,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public Integer deleteBatchIds(List<Integer> asList) {
         return tagMapper.deleteBatchIds(asList);
+    }
+
+    @Override
+    public TagEntity getTagById(Integer id) {
+        return tagMapper.getTagById(id);
     }
 }

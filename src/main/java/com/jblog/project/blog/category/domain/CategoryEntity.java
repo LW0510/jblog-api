@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class CategoryEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class CategoryEntity  {
+
 
 	/**
 	 * 主键ID

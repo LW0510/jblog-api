@@ -37,8 +37,9 @@ public interface TagMapper {
     /**
      * 查询标签列表
      * @return
+     * @param tagEntity
      */
-    List<TagEntity> selectList();
+    List<TagEntity> selectList(TagEntity tagEntity);
 
 
     Integer insert(TagEntity tag);
@@ -48,6 +49,8 @@ public interface TagMapper {
     Integer deleteBatchIds(List<Integer> asList);
 
     List<TagEntity> queryTagList(Map<String, Object> params);
+
+    TagEntity getTagById(Integer id);
 
 }
 

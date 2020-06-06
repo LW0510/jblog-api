@@ -48,7 +48,7 @@ public class UploadController {
 //
 //            return AjaxResult.success(object);
 //        } catch (IOException e) {
-//            log.error("文件上传错误 , uri: {} , caused by: ", request.getRequestURI(), e);
+//            record.error("文件上传错误 , uri: {} , caused by: ", request.getRequestURI(), e);
 //            return AjaxResult.error("文件上传错误");
 //        }
 //    }

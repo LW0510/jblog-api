@@ -56,22 +56,23 @@ public class ArticleController extends BaseController {
     }
 
 
+
     /**
      * 最热文章
      */
     @GetMapping("/hot")
-    public AjaxResult listHotArticles() {
-        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("view_num");
-        return AjaxResult.success(tableDataInfo.getRows());
+    public PageUtil.TableDataInfo listHotArticles() {
+        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("view_num", null);
+        return tableDataInfo;
     }
 
     /**
      * 最新文章
      */
     @GetMapping("/new")
-    public AjaxResult listNewArticles() {
-        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("create_time");
-        return AjaxResult.success(tableDataInfo.getRows());
+    public PageUtil.TableDataInfo listNewArticles(@RequestParam("userId") Long userId) {
+        PageUtil.TableDataInfo tableDataInfo = articleService.getHotOrNewArticles("create_time",userId);
+        return tableDataInfo;
     }
 
 
@@ -111,7 +112,12 @@ public class ArticleController extends BaseController {
         object.put("title", article.getTitle());
         object.put("summary", article.getSummary());
         object.put("content", article.getContent());
-
+        object.put("userId", article.getUserId());
+        object.put("nickName", article.getNickName());
+        object.put("content", article.getContent());
+        object.put("viewNum",article.getViewNum());
+        object.put("commentNum",article.getCommentNum());
+        object.put("weight",article.getWeight());
         object.put("category", categoryService.selectById(article.getCategoryId()));
         object.put("tags", articleTagService.queryArticleTags(article.getId()));
 
@@ -143,23 +149,37 @@ public class ArticleController extends BaseController {
     }
 
     /**
-     * 修改文章
+     * 审核文章
      */
     @PreAuthorize("@ss.hasPermi('system:article:edit')")
-    @PostMapping("/updateArticle")
-    public AjaxResult edit(@RequestBody ArticleForm articleForm)
+    @PostMapping("/auditArticle")
+    public AjaxResult auditArticle(@RequestParam("id") Long id,
+                                   @RequestParam("status") String status)
     {
-        return toAjax(articleService.updateArticle(articleForm));
+        return toAjax(articleService.auditArticle(id,status));
     }
+
 
 
     /**
      * 删除文章
      */
-    @PreAuthorize("@ss.hasPermi('system:article:delete')")
+//    @PreAuthorize("@ss.hasPermi('system:article:delete')")
     @PostMapping("/deleteArticle")
     public AjaxResult delete(@RequestParam("id") Long id)
     {
         return toAjax(articleService.deleteOneArticle(id));
     }
+
+
+    /**
+     * 用户数、评论数、文章数、标签数统计
+     */
+
+    @GetMapping("/count")
+    public AjaxResult count() {
+        AjaxResult result = articleService.count();
+        return result;
+    }
+
 }

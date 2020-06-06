@@ -4,11 +4,14 @@ import com.jblog.project.blog.utils.PageUtil;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
 @Setter
-public class ArticleForm extends PageUtil.PageCondition{
+public class ArticleForm extends PageUtil.PageCondition {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 
@@ -41,5 +44,10 @@ public class ArticleForm extends PageUtil.PageCondition{
     private String status;
 
     private Integer tagId;
+
+    private Integer year;
+
+    private Integer month;
+
 
 }

@@ -5,7 +5,6 @@ import com.jblog.project.blog.category.domain.vo.CategoryVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章类别表
@@ -30,7 +29,7 @@ public interface CategoryMapper {
     CategoryEntity selectById(Integer categoryId);
 
 
-    List<CategoryEntity> queryCategoryList(Map<String, Object> params);
+    List<CategoryEntity> queryCategoryList(CategoryEntity params);
 
 
     Integer insert(CategoryEntity category);

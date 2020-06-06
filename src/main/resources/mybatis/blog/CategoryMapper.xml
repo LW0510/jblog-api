@@ -19,7 +19,7 @@
     </select>
 
     <select id="queryOneCategoryDetail" parameterType="Integer" resultType="com.jblog.project.blog.category.domain.vo.CategoryVo">
-        select c.*, count(a.category_id) as articles from blog_category c
+        select c.*,count(a.category_id) as articles from blog_category c
         left join blog_article a on a.category_id = c.id
         where a.category_id = #{categoryId}
     </select>
@@ -30,6 +30,15 @@
 
     <select id="queryCategoryList" resultMap="categoryMap">
         select * from blog_category
+        <where>
+            <if test="categoryName != null and categoryName != ''">
+                category_name like concat('%',#{categoryName},'%')
+            </if>
+            <if test="description != null and description != ''">
+                and description like concat('%',#{description},'%')
+            </if>
+
+        </where>
     </select>
 
     <insert id="insert">
@@ -39,7 +48,7 @@
         <if test="description != null and description != ''">description,</if>
         create_time
         )values (
-        <if test="categoryName != null and categoryName != ''">#{userId},</if>
+        <if test="categoryName != null and categoryName != ''">#{categoryName},</if>
         <if test="avatar != null and avatar != ''">#{avatar},</if>
         <if test="description != null">#{description},</if>
         sysdate()

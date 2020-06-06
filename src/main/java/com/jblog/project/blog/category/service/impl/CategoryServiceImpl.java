@@ -9,9 +9,7 @@ import com.jblog.project.blog.category.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章类别表
@@ -27,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public List<CategoryEntity> queryPage(Map<String, Object> params) {
+    public List<CategoryEntity> queryPage(CategoryEntity params) {
 
         String url = AddressUtils.getCurrApiAddress();
         List<CategoryEntity> categoryEntities = categoryMapper.queryCategoryList(params);

@@ -40,8 +40,9 @@ public interface TagService {
     /**
      * 获取标签列表
      * @return
+     * @param tagEntity
      */
-    List<TagEntity> selectList();
+    List<TagEntity> selectList(TagEntity tagEntity);
 
 
     Integer insert(TagEntity tag);
@@ -50,5 +51,6 @@ public interface TagService {
 
     Integer deleteBatchIds(List<Integer> asList);
 
+    TagEntity getTagById(Integer id);
 }
 

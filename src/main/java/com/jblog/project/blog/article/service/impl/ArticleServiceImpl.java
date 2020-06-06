@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Joiner;
 import com.jblog.common.exception.CustomException;
 import com.jblog.common.utils.DateUtils;
-import com.jblog.common.utils.bean.BeanUtils;
 import com.jblog.common.utils.ip.AddressUtils;
+import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.ArticleTagEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
@@ -27,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -83,7 +82,6 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
      */
     @Override
     public List<ArticleArchivesVo> queyArticleArchives(int limit) {
-
         return articleMapper.queyArticleArchives(limit);
     }
 
@@ -209,7 +207,7 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
      * @return
      */
     private  Map<Integer, String> getTagMapInfos() {
-        List<TagEntity> tagEntities = tagService.selectList();
+        List<TagEntity> tagEntities = tagService.selectList(null);
         Map<Integer, String> map = new HashMap<>();
         for (TagEntity tag: tagEntities){
             map.put(tag.getId(), tag.getTagName());
@@ -285,10 +283,11 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
      * create_time 最新
      *
      * @param type
+     * @param userId
      * @return
      */
     @Override
-    public PageUtil.TableDataInfo getHotOrNewArticles(String type) {
+    public PageUtil.TableDataInfo getHotOrNewArticles(String type, Long userId) {
 
         PageUtil.PageCondition pageCondition = new  PageUtil.PageCondition();
         pageCondition.setOrderField(type);
@@ -296,8 +295,9 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         pageCondition.setPageSize(HOT_OR_NEW_ARTICLE_NUM);
 
         PageUtil.startMyPage(pageCondition);
-        PageInfo<ArticleEntity> pageInfo = new PageInfo(articleMapper.selectList());
-        List list = pageInfo.getList().stream().map(HotArticleVo::new).collect(Collectors.toList());
+        PageInfo<ArticleEntity> pageInfo = new PageInfo(articleMapper.queryArticleListByUserId(userId));
+        List<ArticleEntity> hotList = pageInfo.getList().stream().filter(item -> "1".equals(item.getStatus())).collect(Collectors.toList());
+        List list = hotList.stream().map(HotArticleVo::new).collect(Collectors.toList());
         PageUtil.TableDataInfo tableDataInfo = new PageUtil.TableDataInfo(list,pageInfo.getTotal());
         return tableDataInfo;
     }
@@ -318,21 +318,19 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
      */
     @Override
     public List selectList() {
-        return articleMapper.selectList();
+        return articleMapper.queryArticleList(null);
     }
 
 
     /**
-     * 更新文章
-     * @param articleForm
+     *
+     * @param id
+     * @param status
      * @return
      */
     @Override
-    public int updateArticle(ArticleForm articleForm) {
-        articleForm.setUpdateTime(DateUtils.getNowDate());
-        ArticleEntity articleEntity = new ArticleEntity();
-        BeanUtils.copyBeanProp(articleForm,articleEntity);
-        return articleMapper.updateArticle(articleEntity);
+    public int auditArticle(Long id,String status) {
+        return articleMapper.auditArticle(id,status);
     }
 
     @Override
@@ -342,5 +340,19 @@ public class ArticleServiceImpl implements com.jblog.project.blog.service.Articl
         //删除文章与标签的关系
         articleTagMapper.deleteArticleTag(id);
         return 1;
+    }
+
+    @Override
+    public AjaxResult count() {
+        AjaxResult result = AjaxResult.success();
+        //获取用户数
+        result.put("userCount",articleMapper.getUserCount());
+        //获取评论数
+        result.put("commentCount",articleMapper.getCommentCount());
+        //获取文章数
+        result.put("articleCount",articleMapper.getArticleCount());
+        //获取标签数
+        result.put("tagCount",articleMapper.getTagCount());
+        return result;
     }
 }

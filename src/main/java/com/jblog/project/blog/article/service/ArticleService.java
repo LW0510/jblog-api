@@ -1,6 +1,6 @@
 package com.jblog.project.blog.service;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jblog.framework.web.domain.AjaxResult;
 import com.jblog.project.blog.article.domain.ArticleEntity;
 import com.jblog.project.blog.article.domain.form.ArticleForm;
 import com.jblog.project.blog.article.domain.vo.ArticleArchivesVo;
@@ -70,9 +70,10 @@ public interface ArticleService{
      * create_time 最新
      *
      * @param type
+     * @param userId
      * @return
      */
-    PageUtil.TableDataInfo getHotOrNewArticles(String type);
+    PageUtil.TableDataInfo getHotOrNewArticles(String type, Long userId);
 
 
     /**
@@ -82,16 +83,11 @@ public interface ArticleService{
      */
     ArticleEntity selectById(Long id);
 
-
-    /**
-     * 修改文章
-     * @param articleForm
-     * @return
-     */
-    int updateArticle(ArticleForm articleForm);
-
+    int auditArticle(Long id,String status);
 
     int deleteOneArticle(Long id);
+
+    AjaxResult count();
 
 }
 

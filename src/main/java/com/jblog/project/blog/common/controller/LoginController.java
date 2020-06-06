@@ -217,7 +217,7 @@
 //                userTokenService.updateById(tokenEntity);
 //            }
 //        } catch (Exception e) {
-//            log.warn("退出登录, 更新token失败！", e);
+//            record.warn("退出登录, 更新token失败！", e);
 //        }
 //        return R.ok();
 //    }
